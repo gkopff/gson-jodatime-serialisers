@@ -4,7 +4,7 @@
 // All Rights Reserved.
 // ===================================================================
 
-package com.github.gkopff.gsonjodatime;
+package com.fatboyindustrial.gsonjodatime;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;

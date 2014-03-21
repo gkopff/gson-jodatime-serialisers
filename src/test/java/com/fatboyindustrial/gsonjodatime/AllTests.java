@@ -4,7 +4,7 @@
 // All Rights Reserved.
 // ===================================================================
 
-package com.github.gkopff.gsonjodatime;
+package com.fatboyindustrial.gsonjodatime;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
