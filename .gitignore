@@ -7,6 +7,7 @@ target
 .idea/tasks.xml
 .idea/libraries/
 .idea/scala_settings.xml
+.idea/dictionaries/
 
 # Mac
 .DS_Store
