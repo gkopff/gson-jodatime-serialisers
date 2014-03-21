@@ -40,7 +40,7 @@ import org.joda.time.format.DateTimeFormatter;
 import java.lang.reflect.Type;
 
 /**
- * GSON serialiser/deserialiser for converting Joda {@link DateTime} objects.*
+ * GSON serialiser/deserialiser for converting Joda {@link DateTime} objects.
  */
 public class LocalTimeConverter implements JsonSerializer<LocalTime>, JsonDeserializer<LocalTime>
 {
