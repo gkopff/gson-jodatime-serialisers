@@ -27,11 +27,8 @@ package com.fatboyindustrial.gsonjodatime;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 import org.joda.time.LocalTime;
 import org.junit.Test;
-
-import java.lang.reflect.Type;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
@@ -47,11 +44,7 @@ public class LocalTimeConverterTest
   @Test
   public void testRoundtrip()
   {
-    final GsonBuilder builder = new GsonBuilder();
-    final Type type = new TypeToken<LocalTime>(){}.getType();
-    builder.registerTypeAdapter(type, new LocalTimeConverter());
-    final Gson gson = builder.create();
-
+    final Gson gson = Converters.registerLocalTime(new GsonBuilder()).create();
     final LocalTime lt = new LocalTime();
 
     assertThat(gson.fromJson(gson.toJson(lt), LocalTime.class), is(lt));

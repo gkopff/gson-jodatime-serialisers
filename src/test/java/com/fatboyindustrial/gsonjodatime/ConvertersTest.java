@@ -27,26 +27,38 @@ package com.fatboyindustrial.gsonjodatime;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import org.joda.time.DateMidnight;
+import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
+import org.joda.time.LocalTime;
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 /**
- *  Tests for {@link LocalDateTimeConverter}.
+ * Tests for {@link Converters}.
  */
-public class LocalDateTimeConverterTest
+public class ConvertersTest
 {
   /**
-   *  Tests that the {@link LocalDateTime} can be round-tripped.
+   * Tests that the {@link Converters#registerAll} method registers the converters successfully.
    */
   @Test
-  public void testRoundtrip()
+  public void testRegisterAll()
   {
-    final Gson gson = Converters.registerLocalDateTime(new GsonBuilder()).create();
+    final Gson gson = Converters.registerAll(new GsonBuilder()).create();
+    final DateMidnight dm = new DateMidnight();
+    final DateTime dt = new DateTime();
+    final LocalDate ld = new LocalDate();
     final LocalDateTime ldt = new LocalDateTime();
+    final LocalTime lt = new LocalTime();
 
+    assertThat(gson.fromJson(gson.toJson(dm), DateMidnight.class), is(dm));
+    assertThat(gson.fromJson(gson.toJson(dt), DateTime.class), is(dt));
+    assertThat(gson.fromJson(gson.toJson(ld), LocalDate.class), is(ld));
     assertThat(gson.fromJson(gson.toJson(ldt), LocalDateTime.class), is(ldt));
+    assertThat(gson.fromJson(gson.toJson(lt), LocalTime.class), is(lt));
   }
 }

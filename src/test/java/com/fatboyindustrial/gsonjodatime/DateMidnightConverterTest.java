@@ -27,11 +27,8 @@ package com.fatboyindustrial.gsonjodatime;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 import org.joda.time.DateMidnight;
 import org.junit.Test;
-
-import java.lang.reflect.Type;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
@@ -47,11 +44,7 @@ public class DateMidnightConverterTest
   @Test
   public void testRoundtrip()
   {
-    final Type type = new TypeToken<DateMidnight>(){}.getType();
-    final GsonBuilder builder = new GsonBuilder();
-    builder.registerTypeAdapter(type, new DateMidnightConverter());
-    final Gson gson = builder.create();
-    
+    final Gson gson = Converters.registerDateMidnight(new GsonBuilder()).create();
     final DateMidnight dm = new DateMidnight();
 
     assertThat(gson.fromJson(gson.toJson(dm), DateMidnight.class), is(dm));
