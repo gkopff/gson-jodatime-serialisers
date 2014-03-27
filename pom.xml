@@ -38,7 +38,7 @@
 
   <licenses>
     <license>
-      <name>Revised BSD Licence</name>
+      <name>The MIT License (MIT)</name>
       <url>http://github.com/gkopff/gson-jodatime-serialisers/blob/master/LICENSE.txt</url>
     </license>
   </licenses>
