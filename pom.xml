@@ -27,14 +27,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.github.gkopff</groupId>
+  <groupId>com.fatboyindustrial.gson-jodatime-serialisers</groupId>
   <artifactId>gson-jodatime-serialisers</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>gson-jodatime-serialisers</name>
   <description>A set of GSON serialisers/deserialisers for dealing with Joda Time entities.</description>
-  <url>http://github.com/gkopff/gson-jodatime-serialisers</url>
+  <url>https://github.com/gkopff/gson-jodatime-serialisers</url>
 
   <licenses>
     <license>
@@ -44,7 +44,7 @@
   </licenses>
 
   <scm>
-    <url>http://github.com/gkopff/gson-jodatime-serialisers</url>
+    <url>https://github.com/gkopff/gson-jodatime-serialisers</url>
     <connection>scm:git:https://github.com/gkopff/gson-jodatime-serialisers.git</connection>
   </scm>
   
