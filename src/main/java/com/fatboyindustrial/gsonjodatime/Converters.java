@@ -40,6 +40,21 @@ import java.lang.reflect.Type;
  */
 public class Converters
 {
+  /** The specific genericized type for {@code DateMidnight}. */
+  public static final Type DATE_MIDNIGHT_TYPE = new TypeToken<DateMidnight>(){}.getType();
+
+  /** The specific genericized type for {@code DateTime}. */
+  public static final Type DATE_TIME_TYPE = new TypeToken<DateTime>(){}.getType();
+
+  /** The specific genericized type for {@code LocalDate}. */
+  public static final Type LOCAL_DATE_TYPE = new TypeToken<LocalDate>(){}.getType();
+
+  /** The specific genericized type for {@code LocalDateTime}. */
+  public static final Type LOCAL_DATE_TIME_TYPE = new TypeToken<LocalDateTime>(){}.getType();
+
+  /** The specific genericized type for {@code LocalTime}. */
+  public static final Type LOCAL_TIME_TYPE = new TypeToken<LocalTime>(){}.getType();
+
   /**
    * Registers all the Joda Time converters.
    * @param builder The GSON builder to register the converters with.
@@ -67,8 +82,7 @@ public class Converters
   {
     if (builder == null) { throw new NullPointerException("builder cannot be null"); }
 
-    final Type type = new TypeToken<DateMidnight>(){}.getType();
-    builder.registerTypeAdapter(type, new DateMidnightConverter());
+    builder.registerTypeAdapter(DATE_MIDNIGHT_TYPE, new DateMidnightConverter());
 
     return builder;
   }
@@ -82,8 +96,7 @@ public class Converters
   {
     if (builder == null) { throw new NullPointerException("builder cannot be null"); }
 
-    final Type type = new TypeToken<DateTime>(){}.getType();
-    builder.registerTypeAdapter(type, new DateTimeConverter());
+    builder.registerTypeAdapter(DATE_TIME_TYPE, new DateTimeConverter());
 
     return builder;
   }
@@ -97,8 +110,7 @@ public class Converters
   {
     if (builder == null) { throw new NullPointerException("builder cannot be null"); }
 
-    final Type type = new TypeToken<LocalDate>(){}.getType();
-    builder.registerTypeAdapter(type, new LocalDateConverter());
+    builder.registerTypeAdapter(LOCAL_DATE_TYPE, new LocalDateConverter());
 
     return builder;
   }
@@ -112,8 +124,7 @@ public class Converters
   {
     if (builder == null) { throw new NullPointerException("builder cannot be null"); }
 
-    final Type type = new TypeToken<LocalDateTime>(){}.getType();
-    builder.registerTypeAdapter(type, new LocalDateTimeConverter());
+    builder.registerTypeAdapter(LOCAL_DATE_TIME_TYPE, new LocalDateTimeConverter());
 
     return builder;
   }
@@ -127,8 +138,7 @@ public class Converters
   {
     if (builder == null) { throw new NullPointerException("builder cannot be null"); }
 
-    final Type type = new TypeToken<LocalTime>(){}.getType();
-    builder.registerTypeAdapter(type, new LocalTimeConverter());
+    builder.registerTypeAdapter(LOCAL_TIME_TYPE, new LocalTimeConverter());
 
     return builder;
   }
