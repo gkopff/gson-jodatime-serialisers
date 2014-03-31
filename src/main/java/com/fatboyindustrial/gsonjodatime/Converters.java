@@ -25,6 +25,7 @@
 
 package com.fatboyindustrial.gsonjodatime;
 
+import com.google.common.base.Optional;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import org.joda.time.DateMidnight;
@@ -40,6 +41,24 @@ import java.lang.reflect.Type;
  */
 public class Converters
 {
+  /** The specific genericized type for {@code DateMidnight}. */
+  public static final Type DATE_MIDNIGHT_TYPE = new TypeToken<DateMidnight>(){}.getType();
+
+  /** The specific genericized type for {@code DateTime}. */
+  public static final Type DATE_TIME_TYPE = new TypeToken<DateTime>(){}.getType();
+
+  /** The specific genericized type for {@code LocalDate}. */
+  public static final Type LOCAL_DATE_TYPE = new TypeToken<LocalDate>(){}.getType();
+
+  /** The specific genericized type for {@code LocalDateTime}. */
+  public static final Type LOCAL_DATE_TIME_TYPE = new TypeToken<LocalDateTime>(){}.getType();
+
+  /** The specific genericized type for {@code LocalTime}. */
+  public static final Type LOCAL_TIME_TYPE = new TypeToken<LocalTime>(){}.getType();
+
+  /** The specific genericized type for {@code Optional<DateTime>}. */
+  public static final Type OPTIONAL_DATE_TIME_TYPE = new TypeToken<Optional<DateTime>>(){}.getType();
+
   /**
    * Registers all the Joda Time converters.
    * @param builder The GSON builder to register the converters with.
@@ -55,6 +74,8 @@ public class Converters
     registerLocalDateTime(builder);
     registerLocalTime(builder);
 
+    registerOptionalDateTime(builder);
+
     return builder;
   }
 
@@ -67,8 +88,7 @@ public class Converters
   {
     if (builder == null) { throw new NullPointerException("builder cannot be null"); }
 
-    final Type type = new TypeToken<DateMidnight>(){}.getType();
-    builder.registerTypeAdapter(type, new DateMidnightConverter());
+    builder.registerTypeAdapter(DATE_MIDNIGHT_TYPE, new DateMidnightConverter());
 
     return builder;
   }
@@ -82,8 +102,7 @@ public class Converters
   {
     if (builder == null) { throw new NullPointerException("builder cannot be null"); }
 
-    final Type type = new TypeToken<DateTime>(){}.getType();
-    builder.registerTypeAdapter(type, new DateTimeConverter());
+    builder.registerTypeAdapter(DATE_TIME_TYPE, new DateTimeConverter());
 
     return builder;
   }
@@ -97,8 +116,7 @@ public class Converters
   {
     if (builder == null) { throw new NullPointerException("builder cannot be null"); }
 
-    final Type type = new TypeToken<LocalDate>(){}.getType();
-    builder.registerTypeAdapter(type, new LocalDateConverter());
+    builder.registerTypeAdapter(LOCAL_DATE_TYPE, new LocalDateConverter());
 
     return builder;
   }
@@ -112,8 +130,7 @@ public class Converters
   {
     if (builder == null) { throw new NullPointerException("builder cannot be null"); }
 
-    final Type type = new TypeToken<LocalDateTime>(){}.getType();
-    builder.registerTypeAdapter(type, new LocalDateTimeConverter());
+    builder.registerTypeAdapter(LOCAL_DATE_TIME_TYPE, new LocalDateTimeConverter());
 
     return builder;
   }
@@ -127,8 +144,21 @@ public class Converters
   {
     if (builder == null) { throw new NullPointerException("builder cannot be null"); }
 
-    final Type type = new TypeToken<LocalTime>(){}.getType();
-    builder.registerTypeAdapter(type, new LocalTimeConverter());
+    builder.registerTypeAdapter(LOCAL_TIME_TYPE, new LocalTimeConverter());
+
+    return builder;
+  }
+
+  /**
+   * Registers the {@code Optional<DateTime>} converter.
+   * @param builder The GSON builder to register the converter with.
+   * @return A reference to {@code builder}.
+   */
+  public static GsonBuilder registerOptionalDateTime(GsonBuilder builder)
+  {
+    if (builder == null) { throw new NullPointerException("builder cannot be null"); }
+
+    builder.registerTypeAdapter(OPTIONAL_DATE_TIME_TYPE, new OptionalDateTimeConverter());
 
     return builder;
   }

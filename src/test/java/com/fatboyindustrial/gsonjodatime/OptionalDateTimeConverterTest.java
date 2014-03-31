@@ -28,59 +28,63 @@ package com.fatboyindustrial.gsonjodatime;
 import com.google.common.base.Optional;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import org.joda.time.DateMidnight;
 import org.joda.time.DateTime;
-import org.joda.time.LocalDate;
-import org.joda.time.LocalDateTime;
-import org.joda.time.LocalTime;
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 /**
- * Tests for {@link Converters}.
+ * Tests for {@link OptionalDateTimeConverter}.
  */
-public class ConvertersTest
+public class OptionalDateTimeConverterTest
 {
   /**
-   * Tests that the {@link Converters#registerAll} method registers the converters successfully.
+   * Tests that the present value can be round-tripped.
    */
   @Test
-  public void testRegisterAll()
+  public void testPresentValueRoundtrip()
   {
-    final Gson gson = Converters.registerAll(new GsonBuilder()).create();
-    final Container original = new Container();
-    original.dm = new DateMidnight();
-    original.dt = new DateTime();
-    original.ld = new LocalDate();
-    original.ldt = new LocalDateTime();
-    original.lt = new LocalTime();
-    original.pdt = Optional.of(new DateTime());
-    original.adt = Optional.absent();
+    final Gson gson = Converters.registerOptionalDateTime(new GsonBuilder()).create();
+    final Optional<DateTime> original = Optional.of(new DateTime());
 
-    final Container reconstituted = gson.fromJson(gson.toJson(original), Container.class);
-
-    assertThat(reconstituted.dm, is(original.dm));
-    assertThat(reconstituted.dt, is(original.dt));
-    assertThat(reconstituted.ld, is(original.ld));
-    assertThat(reconstituted.ldt, is(original.ldt));
-    assertThat(reconstituted.lt, is(original.lt));
-    assertThat(reconstituted.pdt, is(original.pdt));
-    assertThat(reconstituted.adt, is(original.adt));
+    final Optional<DateTime> reconstituted = gson.fromJson(gson.toJson(original, Converters.OPTIONAL_DATE_TIME_TYPE), Converters.OPTIONAL_DATE_TIME_TYPE);
+    assertThat(reconstituted, is(original));
   }
 
   /**
-   * Container for serialising many fields.
+   * Tests that the absent value can be round-tripped.
+   */
+  @Test
+  public void testAbsentValueRoundtrip()
+  {
+    final Gson gson = Converters.registerOptionalDateTime(new GsonBuilder()).create();
+    final Optional<DateTime> original = Optional.absent();
+
+    final Optional<DateTime> reconstituted = gson.fromJson(gson.toJson(original, Converters.OPTIONAL_DATE_TIME_TYPE), Converters.OPTIONAL_DATE_TIME_TYPE);
+    assertThat(reconstituted, is(original));
+  }
+
+  /**
+   * Tests that both present and absent values can be round-tripped when inside a container object.
+   */
+  @Test
+  public void testContainedRoundtrip()
+  {
+    final Gson gson = Converters.registerOptionalDateTime(new GsonBuilder()).create();
+    final Container original = new Container();
+
+    final Container reconstituted = gson.fromJson(gson.toJson(original), Container.class);
+    assertThat(reconstituted.present, is(original.present));
+    assertThat(reconstituted.absent, is(original.absent));
+  }
+
+  /**
+   * A container for encapsulating optional {@link DateTime} instances.
    */
   private static class Container
   {
-    private DateMidnight dm;
-    private DateTime dt;
-    private LocalDate ld;
-    private LocalDateTime ldt;
-    private LocalTime lt;
-    private Optional<DateTime> pdt;
-    private Optional<DateTime> adt;
+    private final Optional<DateTime> present = Optional.of(new DateTime());
+    private final Optional<DateTime> absent = Optional.absent();
   }
 }
