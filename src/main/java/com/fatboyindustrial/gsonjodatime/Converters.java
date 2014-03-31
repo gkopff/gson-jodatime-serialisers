@@ -25,6 +25,7 @@
 
 package com.fatboyindustrial.gsonjodatime;
 
+import com.google.common.base.Optional;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import org.joda.time.DateMidnight;
@@ -55,6 +56,9 @@ public class Converters
   /** The specific genericized type for {@code LocalTime}. */
   public static final Type LOCAL_TIME_TYPE = new TypeToken<LocalTime>(){}.getType();
 
+  /** The specific genericized type for {@code Optional<DateTime>}. */
+  public static final Type OPTIONAL_DATE_TIME_TYPE = new TypeToken<Optional<DateTime>>(){}.getType();
+
   /**
    * Registers all the Joda Time converters.
    * @param builder The GSON builder to register the converters with.
@@ -69,6 +73,8 @@ public class Converters
     registerLocalDate(builder);
     registerLocalDateTime(builder);
     registerLocalTime(builder);
+
+    registerOptionalDateTime(builder);
 
     return builder;
   }
@@ -139,6 +145,20 @@ public class Converters
     if (builder == null) { throw new NullPointerException("builder cannot be null"); }
 
     builder.registerTypeAdapter(LOCAL_TIME_TYPE, new LocalTimeConverter());
+
+    return builder;
+  }
+
+  /**
+   * Registers the {@code Optional<DateTime>} converter.
+   * @param builder The GSON builder to register the converter with.
+   * @return A reference to {@code builder}.
+   */
+  public static GsonBuilder registerOptionalDateTime(GsonBuilder builder)
+  {
+    if (builder == null) { throw new NullPointerException("builder cannot be null"); }
+
+    builder.registerTypeAdapter(OPTIONAL_DATE_TIME_TYPE, new OptionalDateTimeConverter());
 
     return builder;
   }
