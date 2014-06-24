@@ -29,6 +29,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.joda.time.DateMidnight;
 import org.joda.time.DateTime;
+import org.joda.time.Interval;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
 import org.joda.time.LocalTime;
@@ -55,6 +56,7 @@ public class ConvertersTest
     original.ld = new LocalDate();
     original.ldt = new LocalDateTime();
     original.lt = new LocalTime();
+    original.i = new Interval(DateTime.now().minusDays(14), DateTime.now().plusDays(2));
 
     final Container reconstituted = gson.fromJson(gson.toJson(original), Container.class);
 
@@ -63,6 +65,7 @@ public class ConvertersTest
     assertThat(reconstituted.ld, is(original.ld));
     assertThat(reconstituted.ldt, is(original.ldt));
     assertThat(reconstituted.lt, is(original.lt));
+    assertThat(reconstituted.i, is(original.i));
   }
 
   /**
@@ -75,5 +78,6 @@ public class ConvertersTest
     private LocalDate ld;
     private LocalDateTime ldt;
     private LocalTime lt;
+    private Interval i;
   }
 }
