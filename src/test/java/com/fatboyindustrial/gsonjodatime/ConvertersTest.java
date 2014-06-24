@@ -25,7 +25,6 @@
 
 package com.fatboyindustrial.gsonjodatime;
 
-import com.google.common.base.Optional;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.joda.time.DateMidnight;
@@ -56,8 +55,6 @@ public class ConvertersTest
     original.ld = new LocalDate();
     original.ldt = new LocalDateTime();
     original.lt = new LocalTime();
-    original.pdt = Optional.of(new DateTime());
-    original.adt = Optional.absent();
 
     final Container reconstituted = gson.fromJson(gson.toJson(original), Container.class);
 
@@ -66,8 +63,6 @@ public class ConvertersTest
     assertThat(reconstituted.ld, is(original.ld));
     assertThat(reconstituted.ldt, is(original.ldt));
     assertThat(reconstituted.lt, is(original.lt));
-    assertThat(reconstituted.pdt, is(original.pdt));
-    assertThat(reconstituted.adt, is(original.adt));
   }
 
   /**
@@ -80,7 +75,5 @@ public class ConvertersTest
     private LocalDate ld;
     private LocalDateTime ldt;
     private LocalTime lt;
-    private Optional<DateTime> pdt;
-    private Optional<DateTime> adt;
   }
 }
