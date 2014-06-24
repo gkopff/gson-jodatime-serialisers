@@ -26,7 +26,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="gson-jodatime-serialisers" target="1.7" />
+      <module name="gson-jodatime-serialisers" target="1.6" />
     </bytecodeTargetLevel>
   </component>
 </project>
