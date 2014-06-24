@@ -30,6 +30,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import org.joda.time.DateMidnight;
 import org.joda.time.DateTime;
+import org.joda.time.Interval;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
 import org.joda.time.LocalTime;
@@ -59,6 +60,9 @@ public class Converters
   /** The specific genericized type for {@code Optional<DateTime>}. */
   public static final Type OPTIONAL_DATE_TIME_TYPE = new TypeToken<Optional<DateTime>>(){}.getType();
 
+  /** The specific genericized type for {@code Interval}. */
+  public static final Type INTERVAL_TYPE = new TypeToken<Interval>(){}.getType();
+
   /**
    * Registers all the Joda Time converters.
    * @param builder The GSON builder to register the converters with.
@@ -73,6 +77,7 @@ public class Converters
     registerLocalDate(builder);
     registerLocalDateTime(builder);
     registerLocalTime(builder);
+    registerInterval(builder);
 
     registerOptionalDateTime(builder);
 
@@ -145,6 +150,20 @@ public class Converters
     if (builder == null) { throw new NullPointerException("builder cannot be null"); }
 
     builder.registerTypeAdapter(LOCAL_TIME_TYPE, new LocalTimeConverter());
+
+    return builder;
+  }
+
+  /**
+   * Registers the {@link Interval} converter.
+   * @param builder The GSON builder to register the converter with.
+   * @return A reference to {@code builder}.
+   */
+  public static GsonBuilder registerInterval(GsonBuilder builder)
+  {
+    if (builder == null) { throw new NullPointerException("builder cannot be null"); }
+
+    builder.registerTypeAdapter(INTERVAL_TYPE, new IntervalConverter());
 
     return builder;
   }
