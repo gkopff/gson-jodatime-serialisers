@@ -12,7 +12,7 @@ A set of [GSON](http://code.google.com/p/google-gson/) serialiser/deserialisers 
 <dependency>
   <groupId>com.fatboyindustrial.gson-jodatime-serialisers</groupId>
   <artifactId>gson-jodatime-serialisers</artifactId>
-  <version>1.0.0</version>
+  <version>1.1.0</version>
 </dependency>
 ````
 
@@ -25,3 +25,7 @@ final DateTime original = new DateTime();
 final String json = gson.toJson(original);
 final DateTime reconstituted = gson.fromJson(json, DateTime.class);
 ````
+
+#### Java version
+
+GSON Joda Time serialisers uses Java 6 (as of `1.1.0` it is no longer compiled against Java 7).
