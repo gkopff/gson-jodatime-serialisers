@@ -49,8 +49,6 @@ public class IntervalConverterTest
     final Gson gson = Converters.registerInterval(new GsonBuilder()).create();
     final Interval i = new Interval(DateTime.now().minusDays(7), DateTime.now());
 
-    System.out.println(gson.toJson(i));
-
     assertThat(gson.fromJson(gson.toJson(i), Interval.class), is(i));
   }
 }
