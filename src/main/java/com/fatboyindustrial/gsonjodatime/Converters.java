@@ -48,6 +48,12 @@ public class Converters {
     }.getType();
 
     /**
+     * The specific genericized type for {@code Duration}.
+     */
+    public static final Type DURATION_TYPE = new TypeToken<Duration>() {
+    }.getType();
+
+    /**
      * The specific genericized type for {@code LocalDate}.
      */
     public static final Type LOCAL_DATE_TYPE = new TypeToken<LocalDate>() {
@@ -84,6 +90,7 @@ public class Converters {
 
         registerDateMidnight(builder);
         registerDateTime(builder);
+        registerDuration(builder);
         registerLocalDate(builder);
         registerLocalDateTime(builder);
         registerLocalTime(builder);
@@ -120,6 +127,22 @@ public class Converters {
         }
 
         builder.registerTypeAdapter(DATE_TIME_TYPE, new DateTimeConverter());
+
+        return builder;
+    }
+
+    /**
+     * Registers the {@link Duration} converter.
+     *
+     * @param builder The GSON builder to register the converter with.
+     * @return A reference to {@code builder}.
+     */
+    public static GsonBuilder registerDuration(GsonBuilder builder) {
+        if (builder == null) {
+            throw new NullPointerException("builder cannot be null");
+        }
+
+        builder.registerTypeAdapter(DURATION_TYPE, new DurationConverter());
 
         return builder;
     }
