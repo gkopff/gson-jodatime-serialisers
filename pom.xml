@@ -163,12 +163,6 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
-        <dependency>                               <!-- Hamcrest matchers -->
-            <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest-all</artifactId>
-            <version>1.3</version>
-            <scope>test</scope>
-        </dependency>
         <dependency>                               <!-- Joda Time -->
             <groupId>joda-time</groupId>
             <artifactId>joda-time</artifactId>

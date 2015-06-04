@@ -1,39 +1,14 @@
-/*
- * GSON Joda Time Serialisers
- *
- * Copyright 2013-2014 Greg Kopff
- * All rights reserved.
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
-
 package com.fatboyindustrial.gsonjodatime;
 
 import com.google.gson.*;
-import org.joda.time.LocalDateTime;
+import org.joda.time.DateTimeZone;
 
 import java.lang.reflect.Type;
 
 /**
- * GSON serialiser/deserialiser for converting Joda {@link LocalDateTime} objects.
+ * GSON serialiser/deserialiser for converting Joda {@link DateTimeZone} objects.
  */
-public class LocalDateTimeConverter implements JsonSerializer<LocalDateTime>, JsonDeserializer<LocalDateTime> {
+public class DateTimeZoneConverter implements JsonSerializer<DateTimeZone>, JsonDeserializer<DateTimeZone> {
 
     /**
      * Gson invokes this call-back method during serialization when it encounters a field of the
@@ -43,15 +18,15 @@ public class LocalDateTimeConverter implements JsonSerializer<LocalDateTime>, Js
      * {@link JsonSerializationContext#serialize(Object, Type)} method to create JsonElements for any
      * non-trivial field of the {@code src} object. However, you should never invoke it on the
      * {@code src} object itself since that will cause an infinite loop (Gson will call your
-     * call-back method again).
+     * call-back method again).</p>
      *
      * @param src       the object that needs to be converted to Json.
      * @param typeOfSrc the actual type (fully genericized version) of the source object.
      * @return a JsonElement corresponding to the specified object.
      */
     @Override
-    public JsonElement serialize(LocalDateTime src, Type typeOfSrc, JsonSerializationContext context) {
-        return new JsonPrimitive(src.toString());
+    public JsonElement serialize(DateTimeZone src, Type typeOfSrc, JsonSerializationContext context) {
+        return new JsonPrimitive(src.getID());
     }
 
     /**
@@ -70,7 +45,7 @@ public class LocalDateTimeConverter implements JsonSerializer<LocalDateTime>, Js
      * @throws JsonParseException if json is not in the expected format of {@code typeOfT}
      */
     @Override
-    public LocalDateTime deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-        return LocalDateTime.parse(json.getAsString());
+    public DateTimeZone deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+        return DateTimeZone.forID(json.getAsString());
     }
 }

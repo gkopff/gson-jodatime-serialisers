@@ -34,6 +34,7 @@ import java.lang.reflect.Type;
  * GSON serialiser/deserialiser for converting Joda {@link Interval} objects.
  */
 public class IntervalConverter implements JsonSerializer<Interval>, JsonDeserializer<Interval> {
+
     /**
      * Gson invokes this call-back method during serialization when it encounters a field of the
      * specified type.
@@ -69,8 +70,7 @@ public class IntervalConverter implements JsonSerializer<Interval>, JsonDeserial
      * @throws JsonParseException if json is not in the expected format of {@code typeOfT}
      */
     @Override
-    public Interval deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
-            throws JsonParseException {
-        return new Interval(json.getAsString());
+    public Interval deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+        return Interval.parse(json.getAsString());
     }
 }

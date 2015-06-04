@@ -28,8 +28,6 @@ package com.fatboyindustrial.gsonjodatime;
 import com.google.gson.*;
 import org.joda.time.DateTime;
 import org.joda.time.LocalTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 
 import java.lang.reflect.Type;
 
@@ -37,10 +35,6 @@ import java.lang.reflect.Type;
  * GSON serialiser/deserialiser for converting Joda {@link DateTime} objects.
  */
 public class LocalTimeConverter implements JsonSerializer<LocalTime>, JsonDeserializer<LocalTime> {
-    /**
-     * Format specifier
-     */
-    private static final String PATTERN = "HH:mm:ss.SSS";
 
     /**
      * Gson invokes this call-back method during serialization when it encounters a field of the
@@ -58,8 +52,7 @@ public class LocalTimeConverter implements JsonSerializer<LocalTime>, JsonDeseri
      */
     @Override
     public JsonElement serialize(LocalTime src, Type typeOfSrc, JsonSerializationContext context) {
-        final DateTimeFormatter fmt = DateTimeFormat.forPattern(PATTERN);
-        return new JsonPrimitive(fmt.print(src));
+        return new JsonPrimitive(src.toString());
     }
 
     /**
@@ -78,9 +71,7 @@ public class LocalTimeConverter implements JsonSerializer<LocalTime>, JsonDeseri
      * @throws JsonParseException if json is not in the expected format of {@code typeOfT}
      */
     @Override
-    public LocalTime deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
-            throws JsonParseException {
-        final DateTimeFormatter fmt = DateTimeFormat.forPattern(PATTERN);
-        return fmt.parseLocalTime(json.getAsString());
+    public LocalTime deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+        return LocalTime.parse(json.getAsString());
     }
 }
