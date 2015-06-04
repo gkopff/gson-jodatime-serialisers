@@ -26,139 +26,362 @@
 package com.fatboyindustrial.gsonjodatime;
 
 import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
-import org.joda.time.DateMidnight;
-import org.joda.time.DateTime;
-import org.joda.time.Interval;
-import org.joda.time.LocalDate;
-import org.joda.time.LocalDateTime;
-import org.joda.time.LocalTime;
-
-import java.lang.reflect.Type;
+import org.joda.time.*;
 
 /**
  * The {@code Converters} class contains static methods for registering Joda Time converters.
  */
-public class Converters
-{
-  /** The specific genericized type for {@code DateMidnight}. */
-  public static final Type DATE_MIDNIGHT_TYPE = new TypeToken<DateMidnight>(){}.getType();
+public class Converters {
 
-  /** The specific genericized type for {@code DateTime}. */
-  public static final Type DATE_TIME_TYPE = new TypeToken<DateTime>(){}.getType();
+    /**
+     * Registers all the Joda Time converters.
+     *
+     * @param builder The GSON builder to register the converters with.
+     * @return A reference to {@code builder}.
+     */
+    public static GsonBuilder registerAll(GsonBuilder builder) {
 
-  /** The specific genericized type for {@code LocalDate}. */
-  public static final Type LOCAL_DATE_TYPE = new TypeToken<LocalDate>(){}.getType();
+        registerDateTime(builder);
+        registerDateTimeZone(builder);
+        registerDays(builder);
+        registerDuration(builder);
+        registerHours(builder);
+        registerInstant(builder);
+        registerInterval(builder);
+        registerLocalDate(builder);
+        registerLocalDateTime(builder);
+        registerLocalTime(builder);
+        registerMinutes(builder);
+        registerMonths(builder);
+        registerMutableDateTime(builder);
+        registerMutableInterval(builder);
+        registerMutablePeriod(builder);
+        registerPeriod(builder);
+        registerSeconds(builder);
+        registerWeeks(builder);
+        registerYearMonth(builder);
+        registerYears(builder);
 
-  /** The specific genericized type for {@code LocalDateTime}. */
-  public static final Type LOCAL_DATE_TIME_TYPE = new TypeToken<LocalDateTime>(){}.getType();
+        return builder;
+    }
 
-  /** The specific genericized type for {@code LocalTime}. */
-  public static final Type LOCAL_TIME_TYPE = new TypeToken<LocalTime>(){}.getType();
+    /**
+     * Registers the {@link DateTime} converter.
+     *
+     * @param builder The GSON builder to register the converter with.
+     * @return A reference to {@code builder}.
+     */
+    public static GsonBuilder registerDateTime(GsonBuilder builder) {
+        if (builder == null) {
+            throw new NullPointerException("builder cannot be null");
+        }
 
-  /** The specific genericized type for {@code Interval}. */
-  public static final Type INTERVAL_TYPE = new TypeToken<Interval>(){}.getType();
+        builder.registerTypeAdapter(DateTime.class, new DateTimeConverter());
 
-  /**
-   * Registers all the Joda Time converters.
-   * @param builder The GSON builder to register the converters with.
-   * @return A reference to {@code builder}.
-   */
-  public static GsonBuilder registerAll(GsonBuilder builder)
-  {
-    if (builder == null) { throw new NullPointerException("builder cannot be null"); }
+        return builder;
+    }
 
-    registerDateMidnight(builder);
-    registerDateTime(builder);
-    registerLocalDate(builder);
-    registerLocalDateTime(builder);
-    registerLocalTime(builder);
-    registerInterval(builder);
+    /**
+     * Registers the {@link DateTimeZone} converter.
+     *
+     * @param builder The GSON builder to register the converter with.
+     * @return A reference to {@code builder}.
+     */
+    public static GsonBuilder registerDateTimeZone(GsonBuilder builder) {
+        if (builder == null) {
+            throw new NullPointerException("builder cannot be null");
+        }
 
-    return builder;
-  }
+        builder.registerTypeAdapter(DateTimeZone.class, new DateTimeZoneConverter());
 
-  /**
-   * Registers the {@link DateMidnight} converter.
-   * @param builder The GSON builder to register the converter with.
-   * @return A reference to {@code builder}.
-   */
-  public static GsonBuilder registerDateMidnight(GsonBuilder builder)
-  {
-    if (builder == null) { throw new NullPointerException("builder cannot be null"); }
+        return builder;
+    }
 
-    builder.registerTypeAdapter(DATE_MIDNIGHT_TYPE, new DateMidnightConverter());
+    /**
+     * Registers the {@link Duration} converter.
+     *
+     * @param builder The GSON builder to register the converter with.
+     * @return A reference to {@code builder}.
+     */
+    public static GsonBuilder registerDuration(GsonBuilder builder) {
+        if (builder == null) {
+            throw new NullPointerException("builder cannot be null");
+        }
 
-    return builder;
-  }
+        builder.registerTypeAdapter(Duration.class, new DurationConverter());
 
-  /**
-   * Registers the {@link DateTime} converter.
-   * @param builder The GSON builder to register the converter with.
-   * @return A reference to {@code builder}.
-   */
-  public static GsonBuilder registerDateTime(GsonBuilder builder)
-  {
-    if (builder == null) { throw new NullPointerException("builder cannot be null"); }
+        return builder;
+    }
 
-    builder.registerTypeAdapter(DATE_TIME_TYPE, new DateTimeConverter());
+    /**
+     * Registers the {@link Days} converter.
+     *
+     * @param builder The GSON builder to register the converter with.
+     * @return A reference to {@code builder}.
+     */
+    public static GsonBuilder registerDays(GsonBuilder builder) {
+        if (builder == null) {
+            throw new NullPointerException("builder cannot be null");
+        }
 
-    return builder;
-  }
+        builder.registerTypeAdapter(Days.class, new DaysConverter());
 
-  /**
-   * Registers the {@link LocalDate} converter.
-   * @param builder The GSON builder to register the converter with.
-   * @return A reference to {@code builder}.
-   */
-  public static GsonBuilder registerLocalDate(GsonBuilder builder)
-  {
-    if (builder == null) { throw new NullPointerException("builder cannot be null"); }
+        return builder;
+    }
 
-    builder.registerTypeAdapter(LOCAL_DATE_TYPE, new LocalDateConverter());
+    /**
+     * Registers the {@link Hours} converter.
+     *
+     * @param builder The GSON builder to register the converter with.
+     * @return A reference to {@code builder}.
+     */
+    public static GsonBuilder registerHours(GsonBuilder builder) {
+        if (builder == null) {
+            throw new NullPointerException("builder cannot be null");
+        }
 
-    return builder;
-  }
+        builder.registerTypeAdapter(Hours.class, new HoursConverter());
 
-  /**
-   * Registers the {@link LocalDateTime} converter.
-   * @param builder The GSON builder to register the converter with.
-   * @return A reference to {@code builder}.
-   */
-  public static GsonBuilder registerLocalDateTime(GsonBuilder builder)
-  {
-    if (builder == null) { throw new NullPointerException("builder cannot be null"); }
+        return builder;
+    }
 
-    builder.registerTypeAdapter(LOCAL_DATE_TIME_TYPE, new LocalDateTimeConverter());
+    /**
+     * Registers the {@link Instant} converter.
+     *
+     * @param builder The GSON builder to register the converter with.
+     * @return A reference to {@code builder}.
+     */
+    public static GsonBuilder registerInstant(GsonBuilder builder) {
+        if (builder == null) {
+            throw new NullPointerException("builder cannot be null");
+        }
 
-    return builder;
-  }
+        builder.registerTypeAdapter(Instant.class, new InstantConverter());
 
-  /**
-   * Registers the {@link LocalTime} converter.
-   * @param builder The GSON builder to register the converter with.
-   * @return A reference to {@code builder}.
-   */
-  public static GsonBuilder registerLocalTime(GsonBuilder builder)
-  {
-    if (builder == null) { throw new NullPointerException("builder cannot be null"); }
+        return builder;
+    }
 
-    builder.registerTypeAdapter(LOCAL_TIME_TYPE, new LocalTimeConverter());
+    /**
+     * Registers the {@link Interval} converter.
+     *
+     * @param builder The GSON builder to register the converter with.
+     * @return A reference to {@code builder}.
+     */
+    public static GsonBuilder registerInterval(GsonBuilder builder) {
+        if (builder == null) {
+            throw new NullPointerException("builder cannot be null");
+        }
 
-    return builder;
-  }
+        builder.registerTypeAdapter(Interval.class, new IntervalConverter());
 
-  /**
-   * Registers the {@link Interval} converter.
-   * @param builder The GSON builder to register the converter with.
-   * @return A reference to {@code builder}.
-   */
-  public static GsonBuilder registerInterval(GsonBuilder builder)
-  {
-    if (builder == null) { throw new NullPointerException("builder cannot be null"); }
+        return builder;
+    }
 
-    builder.registerTypeAdapter(INTERVAL_TYPE, new IntervalConverter());
+    /**
+     * Registers the {@link LocalDate} converter.
+     *
+     * @param builder The GSON builder to register the converter with.
+     * @return A reference to {@code builder}.
+     */
+    public static GsonBuilder registerLocalDate(GsonBuilder builder) {
+        if (builder == null) {
+            throw new NullPointerException("builder cannot be null");
+        }
 
-    return builder;
-  }
+        builder.registerTypeAdapter(LocalDate.class, new LocalDateConverter());
+
+        return builder;
+    }
+
+    /**
+     * Registers the {@link LocalDateTime} converter.
+     *
+     * @param builder The GSON builder to register the converter with.
+     * @return A reference to {@code builder}.
+     */
+    public static GsonBuilder registerLocalDateTime(GsonBuilder builder) {
+        if (builder == null) {
+            throw new NullPointerException("builder cannot be null");
+        }
+
+        builder.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeConverter());
+
+        return builder;
+    }
+
+    /**
+     * Registers the {@link LocalTime} converter.
+     *
+     * @param builder The GSON builder to register the converter with.
+     * @return A reference to {@code builder}.
+     */
+    public static GsonBuilder registerLocalTime(GsonBuilder builder) {
+        if (builder == null) {
+            throw new NullPointerException("builder cannot be null");
+        }
+
+        builder.registerTypeAdapter(LocalTime.class, new LocalTimeConverter());
+
+        return builder;
+    }
+
+    /**
+     * Registers the {@link Minutes} converter.
+     *
+     * @param builder The GSON builder to register the converter with.
+     * @return A reference to {@code builder}.
+     */
+    public static GsonBuilder registerMinutes(GsonBuilder builder) {
+        if (builder == null) {
+            throw new NullPointerException("builder cannot be null");
+        }
+
+        builder.registerTypeAdapter(Minutes.class, new MinutesConverter());
+
+        return builder;
+    }
+
+    /**
+     * Registers the {@link Months} converter.
+     *
+     * @param builder The GSON builder to register the converter with.
+     * @return A reference to {@code builder}.
+     */
+    public static GsonBuilder registerMonths(GsonBuilder builder) {
+        if (builder == null) {
+            throw new NullPointerException("builder cannot be null");
+        }
+
+        builder.registerTypeAdapter(Months.class, new MonthsConverter());
+
+        return builder;
+    }
+
+    /**
+     * Registers the {@link MutableDateTime} converter.
+     *
+     * @param builder The GSON builder to register the converter with.
+     * @return A reference to {@code builder}.
+     */
+    public static GsonBuilder registerMutableDateTime(GsonBuilder builder) {
+        if (builder == null) {
+            throw new NullPointerException("builder cannot be null");
+        }
+
+        builder.registerTypeAdapter(MutableDateTime.class, new MutableDateTimeConverter());
+
+        return builder;
+    }
+
+    /**
+     * Registers the {@link MutableInterval} converter.
+     *
+     * @param builder The GSON builder to register the converter with.
+     * @return A reference to {@code builder}.
+     */
+    public static GsonBuilder registerMutableInterval(GsonBuilder builder) {
+        if (builder == null) {
+            throw new NullPointerException("builder cannot be null");
+        }
+
+        builder.registerTypeAdapter(MutableInterval.class, new MutableIntervalConverter());
+
+        return builder;
+    }
+
+    /**
+     * Registers the {@link MutablePeriod} converter.
+     *
+     * @param builder The GSON builder to register the converter with.
+     * @return A reference to {@code builder}.
+     */
+    public static GsonBuilder registerMutablePeriod(GsonBuilder builder) {
+        if (builder == null) {
+            throw new NullPointerException("builder cannot be null");
+        }
+
+        builder.registerTypeAdapter(MutablePeriod.class, new MutablePeriodConverter());
+
+        return builder;
+    }
+
+    /**
+     * Registers the {@link Period} converter.
+     *
+     * @param builder The GSON builder to register the converter with.
+     * @return A reference to {@code builder}.
+     */
+    public static GsonBuilder registerPeriod(GsonBuilder builder) {
+        if (builder == null) {
+            throw new NullPointerException("builder cannot be null");
+        }
+
+        builder.registerTypeAdapter(Period.class, new PeriodConverter());
+
+        return builder;
+    }
+
+    /**
+     * Registers the {@link Seconds} converter.
+     *
+     * @param builder The GSON builder to register the converter with.
+     * @return A reference to {@code builder}.
+     */
+    public static GsonBuilder registerSeconds(GsonBuilder builder) {
+        if (builder == null) {
+            throw new NullPointerException("builder cannot be null");
+        }
+
+        builder.registerTypeAdapter(Seconds.class, new SecondsConverter());
+
+        return builder;
+    }
+
+    /**
+     * Registers the {@link Weeks} converter.
+     *
+     * @param builder The GSON builder to register the converter with.
+     * @return A reference to {@code builder}.
+     */
+    public static GsonBuilder registerWeeks(GsonBuilder builder) {
+        if (builder == null) {
+            throw new NullPointerException("builder cannot be null");
+        }
+
+        builder.registerTypeAdapter(Weeks.class, new WeeksConverter());
+
+        return builder;
+    }
+
+    /**
+     * Registers the {@link YearMonth} converter.
+     *
+     * @param builder The GSON builder to register the converter with.
+     * @return A reference to {@code builder}.
+     */
+    public static GsonBuilder registerYearMonth(GsonBuilder builder) {
+        if (builder == null) {
+            throw new NullPointerException("builder cannot be null");
+        }
+
+        builder.registerTypeAdapter(YearMonth.class, new YearMonthConverter());
+
+        return builder;
+    }
+
+    /**
+     * Registers the {@link Years} converter.
+     *
+     * @param builder The GSON builder to register the converter with.
+     * @return A reference to {@code builder}.
+     */
+    public static GsonBuilder registerYears(GsonBuilder builder) {
+        if (builder == null) {
+            throw new NullPointerException("builder cannot be null");
+        }
+
+        builder.registerTypeAdapter(Years.class, new YearsConverter());
+
+        return builder;
+    }
 }

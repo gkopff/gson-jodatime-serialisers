@@ -27,57 +27,93 @@ package com.fatboyindustrial.gsonjodatime;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import org.joda.time.DateMidnight;
-import org.joda.time.DateTime;
-import org.joda.time.Interval;
-import org.joda.time.LocalDate;
-import org.joda.time.LocalDateTime;
-import org.joda.time.LocalTime;
+import org.joda.time.*;
 import org.junit.Test;
 
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Tests for {@link Converters}.
  */
-public class ConvertersTest
-{
-  /**
-   * Tests that the {@link Converters#registerAll} method registers the converters successfully.
-   */
-  @Test
-  public void testRegisterAll()
-  {
-    final Gson gson = Converters.registerAll(new GsonBuilder()).create();
-    final Container original = new Container();
-    original.dm = new DateMidnight();
-    original.dt = new DateTime();
-    original.ld = new LocalDate();
-    original.ldt = new LocalDateTime();
-    original.lt = new LocalTime();
-    original.i = new Interval(DateTime.now().minusDays(14), DateTime.now().plusDays(2));
+public class ConvertersTest {
+    /**
+     * Tests that the {@link Converters#registerAll} method registers the converters successfully.
+     */
+    @Test
+    public void testRegisterAll() {
+        final Container original = new Container();
+        original.dt = new DateTime().withZone(DateTimeZone.forID("America/Boise"));
+        original.dtz = DateTimeZone.forID("America/Boise");
+        original.days = Days.days(6);
+        original.d = Duration.standardMinutes(30L);
+        original.hours = Hours.hours(33);
+        original.instant = Instant.now();
+        original.interval = new Interval(DateTime.now().minusDays(14), DateTime.now().plusDays(2));
+        original.ld = new LocalDate();
+        original.ldt = new LocalDateTime();
+        original.lt = new LocalTime();
+        original.minutes = Minutes.minutes(55);
+        original.months = Months.months(7);
+        original.mdt = MutableDateTime.now();
+        original.minterval = new MutableInterval(DateTime.now().minusDays(14), DateTime.now().plusDays(2));
+        original.minutes = Minutes.minutes(42);
+        original.mp = new MutablePeriod(1, 33, 5, 90);
+        original.p = new Period(1, 33, 5, 90);
+        original.seconds = Seconds.seconds(43);
+        original.weeks = Weeks.weeks(4);
+        original.ym = YearMonth.now();
+        original.years = Years.years(4);
 
-    final Container reconstituted = gson.fromJson(gson.toJson(original), Container.class);
+        final Gson gson = Converters.registerAll(new GsonBuilder()).create();
+        final Container reconstituted = gson.fromJson(gson.toJson(original), Container.class);
 
-    assertThat(reconstituted.dm, is(original.dm));
-    assertThat(reconstituted.dt, is(original.dt));
-    assertThat(reconstituted.ld, is(original.ld));
-    assertThat(reconstituted.ldt, is(original.ldt));
-    assertThat(reconstituted.lt, is(original.lt));
-    assertThat(reconstituted.i, is(original.i));
-  }
+        assertTrue(reconstituted.dt.isEqual(original.dt));
+        assertEquals(reconstituted.dtz, original.dtz);
+        assertEquals(reconstituted.days, original.days);
+        assertEquals(reconstituted.d, original.d);
+        assertEquals(reconstituted.hours, original.hours);
+        assertEquals(reconstituted.instant, original.instant);
+        assertEquals(reconstituted.interval, original.interval);
+        assertEquals(reconstituted.ld, original.ld);
+        assertEquals(reconstituted.ldt, original.ldt);
+        assertEquals(reconstituted.lt, original.lt);
+        assertEquals(reconstituted.minutes, original.minutes);
+        assertEquals(reconstituted.months, original.months);
+        assertTrue(reconstituted.mdt.isEqual(original.mdt));
+        assertEquals(reconstituted.minterval, original.minterval);
+        assertEquals(reconstituted.minutes, original.minutes);
+        assertEquals(reconstituted.mp, original.mp);
+        assertEquals(reconstituted.p, original.p);
+        assertEquals(reconstituted.seconds, original.seconds);
+        assertEquals(reconstituted.weeks, original.weeks);
+        assertEquals(reconstituted.ym, original.ym);
+        assertEquals(reconstituted.years, original.years);
+    }
 
-  /**
-   * Container for serialising many fields.
-   */
-  private static class Container
-  {
-    private DateMidnight dm;
-    private DateTime dt;
-    private LocalDate ld;
-    private LocalDateTime ldt;
-    private LocalTime lt;
-    private Interval i;
-  }
+    /**
+     * Container for serialising many fields.
+     */
+    private static class Container {
+        private DateTime dt;
+        private DateTimeZone dtz;
+        private Days days;
+        private Duration d;
+        private Hours hours;
+        private Instant instant;
+        private Interval interval;
+        private LocalDate ld;
+        private LocalDateTime ldt;
+        private LocalTime lt;
+        private Minutes minutes;
+        private Months months;
+        private MutableDateTime mdt;
+        private MutableInterval minterval;
+        private MutablePeriod mp;
+        private Period p;
+        private Seconds seconds;
+        private Weeks weeks;
+        private YearMonth ym;
+        private Years years;
+    }
 }

@@ -24,7 +24,7 @@
  */
 
 /**
- *  Contains {@link com.google.gson.JsonSerializer} and {@link com.google.gson.JsonDeserializer} 
- *  implementations for dealing with Joda Time entities.
+ * Contains {@link com.google.gson.JsonSerializer} and {@link com.google.gson.JsonDeserializer}
+ * implementations for dealing with Joda Time entities.
  */
 package com.fatboyindustrial.gsonjodatime;
