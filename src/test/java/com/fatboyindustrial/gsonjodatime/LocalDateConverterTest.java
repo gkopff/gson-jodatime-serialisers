@@ -36,17 +36,15 @@ import static org.junit.Assert.assertThat;
 /**
  * Tests for {@link LocalDateConverter}.
  */
-public class LocalDateConverterTest
-{
-  /**
-   * Tests that the {@link LocalDate} can be round-tripped.
-   */
-  @Test
-  public void testRoundtrip()
-  {
-    final Gson gson = Converters.registerLocalDate(new GsonBuilder()).create();
-    final LocalDate ld = new LocalDate();
+public class LocalDateConverterTest {
+    /**
+     * Tests that the {@link LocalDate} can be round-tripped.
+     */
+    @Test
+    public void testRoundtrip() {
+        final Gson gson = Converters.registerLocalDate(new GsonBuilder()).create();
+        final LocalDate ld = new LocalDate();
 
-    assertThat(gson.fromJson(gson.toJson(ld), LocalDate.class), is(ld));
-  }
+        assertThat(gson.fromJson(gson.toJson(ld), LocalDate.class), is(ld));
+    }
 }

@@ -38,17 +38,15 @@ import static org.junit.Assert.assertThat;
 /**
  * Tests for {@link IntervalConverter}.
  */
-public class IntervalConverterTest
-{
-  /**
-   * Tests that the {@link LocalTime} can be round-tripped.
-   */
-  @Test
-  public void testRoundtrip()
-  {
-    final Gson gson = Converters.registerInterval(new GsonBuilder()).create();
-    final Interval i = new Interval(DateTime.now().minusDays(7), DateTime.now());
+public class IntervalConverterTest {
+    /**
+     * Tests that the {@link LocalTime} can be round-tripped.
+     */
+    @Test
+    public void testRoundtrip() {
+        final Gson gson = Converters.registerInterval(new GsonBuilder()).create();
+        final Interval i = new Interval(DateTime.now().minusDays(7), DateTime.now());
 
-    assertThat(gson.fromJson(gson.toJson(i), Interval.class), is(i));
-  }
+        assertThat(gson.fromJson(gson.toJson(i), Interval.class), is(i));
+    }
 }

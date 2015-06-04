@@ -34,19 +34,17 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 /**
- *  Tests for {@link LocalDateTimeConverter}.
+ * Tests for {@link LocalDateTimeConverter}.
  */
-public class LocalDateTimeConverterTest
-{
-  /**
-   *  Tests that the {@link LocalDateTime} can be round-tripped.
-   */
-  @Test
-  public void testRoundtrip()
-  {
-    final Gson gson = Converters.registerLocalDateTime(new GsonBuilder()).create();
-    final LocalDateTime ldt = new LocalDateTime();
+public class LocalDateTimeConverterTest {
+    /**
+     * Tests that the {@link LocalDateTime} can be round-tripped.
+     */
+    @Test
+    public void testRoundtrip() {
+        final Gson gson = Converters.registerLocalDateTime(new GsonBuilder()).create();
+        final LocalDateTime ldt = new LocalDateTime();
 
-    assertThat(gson.fromJson(gson.toJson(ldt), LocalDateTime.class), is(ldt));
-  }
+        assertThat(gson.fromJson(gson.toJson(ldt), LocalDateTime.class), is(ldt));
+    }
 }

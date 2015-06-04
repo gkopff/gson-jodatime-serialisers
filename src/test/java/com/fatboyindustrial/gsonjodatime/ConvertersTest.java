@@ -27,12 +27,7 @@ package com.fatboyindustrial.gsonjodatime;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import org.joda.time.DateMidnight;
-import org.joda.time.DateTime;
-import org.joda.time.Interval;
-import org.joda.time.LocalDate;
-import org.joda.time.LocalDateTime;
-import org.joda.time.LocalTime;
+import org.joda.time.*;
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.is;
@@ -41,43 +36,40 @@ import static org.junit.Assert.assertThat;
 /**
  * Tests for {@link Converters}.
  */
-public class ConvertersTest
-{
-  /**
-   * Tests that the {@link Converters#registerAll} method registers the converters successfully.
-   */
-  @Test
-  public void testRegisterAll()
-  {
-    final Gson gson = Converters.registerAll(new GsonBuilder()).create();
-    final Container original = new Container();
-    original.dm = new DateMidnight();
-    original.dt = new DateTime();
-    original.ld = new LocalDate();
-    original.ldt = new LocalDateTime();
-    original.lt = new LocalTime();
-    original.i = new Interval(DateTime.now().minusDays(14), DateTime.now().plusDays(2));
+public class ConvertersTest {
+    /**
+     * Tests that the {@link Converters#registerAll} method registers the converters successfully.
+     */
+    @Test
+    public void testRegisterAll() {
+        final Gson gson = Converters.registerAll(new GsonBuilder()).create();
+        final Container original = new Container();
+        original.dm = new DateMidnight();
+        original.dt = new DateTime();
+        original.ld = new LocalDate();
+        original.ldt = new LocalDateTime();
+        original.lt = new LocalTime();
+        original.i = new Interval(DateTime.now().minusDays(14), DateTime.now().plusDays(2));
 
-    final Container reconstituted = gson.fromJson(gson.toJson(original), Container.class);
+        final Container reconstituted = gson.fromJson(gson.toJson(original), Container.class);
 
-    assertThat(reconstituted.dm, is(original.dm));
-    assertThat(reconstituted.dt, is(original.dt));
-    assertThat(reconstituted.ld, is(original.ld));
-    assertThat(reconstituted.ldt, is(original.ldt));
-    assertThat(reconstituted.lt, is(original.lt));
-    assertThat(reconstituted.i, is(original.i));
-  }
+        assertThat(reconstituted.dm, is(original.dm));
+        assertThat(reconstituted.dt, is(original.dt));
+        assertThat(reconstituted.ld, is(original.ld));
+        assertThat(reconstituted.ldt, is(original.ldt));
+        assertThat(reconstituted.lt, is(original.lt));
+        assertThat(reconstituted.i, is(original.i));
+    }
 
-  /**
-   * Container for serialising many fields.
-   */
-  private static class Container
-  {
-    private DateMidnight dm;
-    private DateTime dt;
-    private LocalDate ld;
-    private LocalDateTime ldt;
-    private LocalTime lt;
-    private Interval i;
-  }
+    /**
+     * Container for serialising many fields.
+     */
+    private static class Container {
+        private DateMidnight dm;
+        private DateTime dt;
+        private LocalDate ld;
+        private LocalDateTime ldt;
+        private LocalTime lt;
+        private Interval i;
+    }
 }

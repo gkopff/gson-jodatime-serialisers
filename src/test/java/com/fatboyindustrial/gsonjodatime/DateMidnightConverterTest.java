@@ -36,17 +36,15 @@ import static org.junit.Assert.assertThat;
 /**
  * Tests for {@link DateMidnightConverter}.
  */
-public class DateMidnightConverterTest
-{
-  /**
-   * Tests that the {@link DateMidnight} can be round-tripped.
-   */
-  @Test
-  public void testRoundtrip()
-  {
-    final Gson gson = Converters.registerDateMidnight(new GsonBuilder()).create();
-    final DateMidnight dm = new DateMidnight();
+public class DateMidnightConverterTest {
+    /**
+     * Tests that the {@link DateMidnight} can be round-tripped.
+     */
+    @Test
+    public void testRoundtrip() {
+        final Gson gson = Converters.registerDateMidnight(new GsonBuilder()).create();
+        final DateMidnight dm = new DateMidnight();
 
-    assertThat(gson.fromJson(gson.toJson(dm), DateMidnight.class), is(dm));
-  }
+        assertThat(gson.fromJson(gson.toJson(dm), DateMidnight.class), is(dm));
+    }
 }

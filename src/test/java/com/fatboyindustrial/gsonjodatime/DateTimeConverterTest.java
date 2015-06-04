@@ -34,19 +34,17 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 /**
- *  Tests for {@link DateTimeConverter}.
+ * Tests for {@link DateTimeConverter}.
  */
-public class DateTimeConverterTest
-{
-  /**
-   *  Tests that the {@link DateTime} can be round-tripped.
-   */
-  @Test
-  public void testRoundtrip()
-  {
-    final Gson gson = Converters.registerDateTime(new GsonBuilder()).create();
-    final DateTime dt = new DateTime();
-    
-    assertThat(gson.fromJson(gson.toJson(dt), DateTime.class), is(dt));
-  }
+public class DateTimeConverterTest {
+    /**
+     * Tests that the {@link DateTime} can be round-tripped.
+     */
+    @Test
+    public void testRoundtrip() {
+        final Gson gson = Converters.registerDateTime(new GsonBuilder()).create();
+        final DateTime dt = new DateTime();
+
+        assertThat(gson.fromJson(gson.toJson(dt), DateTime.class), is(dt));
+    }
 }
