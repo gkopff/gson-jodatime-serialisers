@@ -8,6 +8,7 @@ A set of [GSON](http://code.google.com/p/google-gson/) serialiser/deserialisers 
 
 * `DateMidnight`
 * `DateTime`
+* `Duration`
 * `Interval`
 * `LocalDate`
 * `LocalDateTime`
