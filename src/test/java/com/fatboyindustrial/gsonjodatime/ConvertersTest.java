@@ -29,6 +29,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.joda.time.DateMidnight;
 import org.joda.time.DateTime;
+import org.joda.time.Duration;
 import org.joda.time.Interval;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
@@ -51,8 +52,10 @@ public class ConvertersTest
   {
     final Gson gson = Converters.registerAll(new GsonBuilder()).create();
     final Container original = new Container();
+    //noinspection deprecation
     original.dm = new DateMidnight();
     original.dt = new DateTime();
+    original.d = Duration.standardMinutes(30L);
     original.ld = new LocalDate();
     original.ldt = new LocalDateTime();
     original.lt = new LocalTime();
@@ -62,6 +65,7 @@ public class ConvertersTest
 
     assertThat(reconstituted.dm, is(original.dm));
     assertThat(reconstituted.dt, is(original.dt));
+    assertThat(reconstituted.d, is(original.d));
     assertThat(reconstituted.ld, is(original.ld));
     assertThat(reconstituted.ldt, is(original.ldt));
     assertThat(reconstituted.lt, is(original.lt));
@@ -73,8 +77,10 @@ public class ConvertersTest
    */
   private static class Container
   {
+    @SuppressWarnings("deprecation")
     private DateMidnight dm;
     private DateTime dt;
+    private Duration d;
     private LocalDate ld;
     private LocalDateTime ldt;
     private LocalTime lt;
