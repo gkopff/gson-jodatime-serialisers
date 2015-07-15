@@ -87,6 +87,11 @@ public class LocalTimeConverter implements JsonSerializer<LocalTime>, JsonDeseri
   public LocalTime deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
       throws JsonParseException
   {
+      /* Do not try to deserialize null or empty values */
+      if(json.getAsString() == null || json.getAsString().isEmpty()) {
+          return null;
+      }
+      
     final DateTimeFormatter fmt = DateTimeFormat.forPattern(PATTERN);
     return fmt.parseLocalTime(json.getAsString());
   }

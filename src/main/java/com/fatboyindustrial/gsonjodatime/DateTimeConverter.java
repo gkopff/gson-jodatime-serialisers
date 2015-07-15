@@ -84,6 +84,11 @@ public class DateTimeConverter implements JsonSerializer<DateTime>, JsonDeserial
   public DateTime deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
       throws JsonParseException
   {
+      /* Do not try to deserialize null or empty values */
+      if(json.getAsString() == null || json.getAsString().isEmpty()) {
+          return null;
+      }
+      
     final DateTimeFormatter fmt = ISODateTimeFormat.dateTime();
     return fmt.parseDateTime(json.getAsString());
   }
