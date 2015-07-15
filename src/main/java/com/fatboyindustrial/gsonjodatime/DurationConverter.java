@@ -78,6 +78,11 @@ public class DurationConverter implements JsonSerializer<Duration>, JsonDeserial
   public Duration deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
       throws JsonParseException
   {
+      /* Do not try to deserialize null or empty values */
+      if(json.getAsString() == null || json.getAsString().isEmpty()) {
+          return null;
+      }
+      
     return Duration.parse(json.getAsString());
   }
 }

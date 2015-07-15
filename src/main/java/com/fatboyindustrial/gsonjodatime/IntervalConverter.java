@@ -80,6 +80,11 @@ public class IntervalConverter implements JsonSerializer<Interval>, JsonDeserial
   public Interval deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
       throws JsonParseException
   {
+      /* Do not try to deserialize null or empty values */
+      if(json.getAsString() == null || json.getAsString().isEmpty()) {
+          return null;
+      }
+      
     return new Interval(json.getAsString());
   }
 }
