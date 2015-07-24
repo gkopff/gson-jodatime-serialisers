@@ -3,4 +3,4 @@
 ## [1.2.0] - 2015-07-24
 
 ### Changed
- - Deserialise empty strings and null strings to a null object
+ - Deserialise empty strings and null strings to a null object (contributed by [anilmamede](https://github.com/anilmamede))
