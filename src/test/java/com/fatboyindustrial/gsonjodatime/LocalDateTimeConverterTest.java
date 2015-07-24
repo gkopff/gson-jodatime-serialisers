@@ -31,6 +31,7 @@ import org.joda.time.LocalDateTime;
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -48,5 +49,27 @@ public class LocalDateTimeConverterTest
     final LocalDateTime ldt = new LocalDateTime();
 
     assertThat(gson.fromJson(gson.toJson(ldt), LocalDateTime.class), is(ldt));
+  }
+
+  /**
+   * Tests that deserialising an empty string returns null
+   */
+  @Test
+  public void testDeserialiseEmptyString()
+  {
+    final Gson gson = Converters.registerLocalDateTime(new GsonBuilder()).create();
+
+    assertThat(gson.fromJson("", LocalDateTime.class), is(nullValue()));
+  }
+
+  /**
+   * Tests that deserialising a null string returns null
+   */
+  @Test
+  public void testDeserialiseNullString()
+  {
+    final Gson gson = Converters.registerLocalDateTime(new GsonBuilder()).create();
+
+    assertThat(gson.fromJson((String) null, LocalDateTime.class), is(nullValue()));
   }
 }

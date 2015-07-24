@@ -31,6 +31,7 @@ import org.joda.time.Duration;
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -48,5 +49,27 @@ public class DurationConverterTest
     final Duration d = Duration.standardMinutes(30L);
 
     assertThat(gson.fromJson(gson.toJson(d), Duration.class), is(d));
+  }
+
+  /**
+   * Tests that deserialising an empty string returns null
+   */
+  @Test
+  public void testDeserialiseEmptyString()
+  {
+    final Gson gson = Converters.registerDuration(new GsonBuilder()).create();
+
+    assertThat(gson.fromJson("", Duration.class), is(nullValue()));
+  }
+
+  /**
+   * Tests that deserialising a null string returns null
+   */
+  @Test
+  public void testDeserialiseNullString()
+  {
+    final Gson gson = Converters.registerDuration(new GsonBuilder()).create();
+
+    assertThat(gson.fromJson((String) null, Duration.class), is(nullValue()));
   }
 }
