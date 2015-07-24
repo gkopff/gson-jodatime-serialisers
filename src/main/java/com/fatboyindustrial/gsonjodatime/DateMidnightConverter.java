@@ -1,7 +1,7 @@
 /*
  * GSON Joda Time Serialisers
  *
- * Copyright 2013-2014 Greg Kopff
+ * Copyright 2013-2015 Greg Kopff
  * All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -52,7 +52,6 @@ public class DateMidnightConverter implements JsonSerializer<DateMidnight>, Json
    * non-trivial field of the {@code src} object. However, you should never invoke it on the
    * {@code src} object itself since that will cause an infinite loop (Gson will call your
    * call-back method again).
-   *
    * @param src the object that needs to be converted to Json.
    * @param typeOfSrc the actual type (fully genericized version) of the source object.
    * @return a JsonElement corresponding to the specified object.
@@ -73,7 +72,6 @@ public class DateMidnightConverter implements JsonSerializer<DateMidnight>, Json
    * for any non-trivial field of the returned object. However, you should never invoke it on the
    * the same type passing {@code json} since that will cause an infinite loop (Gson will call your
    * call-back method again).
-   *
    * @param json The Json data being deserialized
    * @param typeOfT The type of the Object to deserialize to
    * @return a deserialized object of the specified type typeOfT which is a subclass of {@code T}
@@ -83,11 +81,12 @@ public class DateMidnightConverter implements JsonSerializer<DateMidnight>, Json
   public DateMidnight deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
       throws JsonParseException
   {
-      /* Do not try to deserialize null or empty values */
-      if(json.getAsString() == null || json.getAsString().isEmpty()) {
-          return null;
-      }
-      
+    // Do not try to deserialize null or empty values
+    if (json.getAsString() == null || json.getAsString().isEmpty())
+    {
+      return null;
+    }
+
     final DateTimeFormatter fmt = ISODateTimeFormat.dateTime();
     return new DateMidnight(fmt.parseDateTime(json.getAsString()));
   }
