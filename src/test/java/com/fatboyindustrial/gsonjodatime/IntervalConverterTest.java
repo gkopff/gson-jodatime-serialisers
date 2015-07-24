@@ -33,6 +33,7 @@ import org.joda.time.LocalTime;
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -50,5 +51,27 @@ public class IntervalConverterTest
     final Interval i = new Interval(DateTime.now().minusDays(7), DateTime.now());
 
     assertThat(gson.fromJson(gson.toJson(i), Interval.class), is(i));
+  }
+
+  /**
+   * Tests that deserialising an empty string returns null
+   */
+  @Test
+  public void testDeserialiseEmptyString()
+  {
+    final Gson gson = Converters.registerInterval(new GsonBuilder()).create();
+
+    assertThat(gson.fromJson("", Interval.class), is(nullValue()));
+  }
+
+  /**
+   * Tests that deserialising a null string returns null
+   */
+  @Test
+  public void testDeserialiseNullString()
+  {
+    final Gson gson = Converters.registerInterval(new GsonBuilder()).create();
+
+    assertThat(gson.fromJson((String) null, Interval.class), is(nullValue()));
   }
 }

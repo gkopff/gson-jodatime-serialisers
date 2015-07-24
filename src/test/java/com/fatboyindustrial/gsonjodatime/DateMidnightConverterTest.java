@@ -31,6 +31,7 @@ import org.joda.time.DateMidnight;
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -48,5 +49,27 @@ public class DateMidnightConverterTest
     final DateMidnight dm = new DateMidnight();
 
     assertThat(gson.fromJson(gson.toJson(dm), DateMidnight.class), is(dm));
+  }
+
+  /**
+   * Tests that deserialising an empty string returns null
+   */
+  @Test
+  public void testDeserialiseEmptyString()
+  {
+    final Gson gson = Converters.registerDateMidnight(new GsonBuilder()).create();
+
+    assertThat(gson.fromJson("", DateMidnight.class), is(nullValue()));
+  }
+
+  /**
+   * Tests that deserialising a null string returns null
+   */
+  @Test
+  public void testDeserialiseNullString()
+  {
+    final Gson gson = Converters.registerDateMidnight(new GsonBuilder()).create();
+
+    assertThat(gson.fromJson((String) null, DateMidnight.class), is(nullValue()));
   }
 }

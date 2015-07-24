@@ -31,6 +31,7 @@ import org.joda.time.DateTime;
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -48,5 +49,27 @@ public class DateTimeConverterTest
     final DateTime dt = new DateTime();
     
     assertThat(gson.fromJson(gson.toJson(dt), DateTime.class), is(dt));
+  }
+
+  /**
+   * Tests that deserialising an empty string returns null
+   */
+  @Test
+  public void testDeserialiseEmptyString()
+  {
+    final Gson gson = Converters.registerDateTime(new GsonBuilder()).create();
+
+    assertThat(gson.fromJson("", DateTime.class), is(nullValue()));
+  }
+
+  /**
+   * Tests that deserialising a null string returns null
+   */
+  @Test
+  public void testDeserialiseNullString()
+  {
+    final Gson gson = Converters.registerDateTime(new GsonBuilder()).create();
+
+    assertThat(gson.fromJson((String) null, DateTime.class), is(nullValue()));
   }
 }
