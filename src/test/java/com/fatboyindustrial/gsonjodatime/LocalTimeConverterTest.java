@@ -28,6 +28,9 @@ package com.fatboyindustrial.gsonjodatime;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.joda.time.LocalTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+import org.joda.time.format.ISODateTimeFormat;
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.is;
@@ -49,6 +52,15 @@ public class LocalTimeConverterTest
     final LocalTime lt = new LocalTime();
 
     assertThat(gson.fromJson(gson.toJson(lt), LocalTime.class), is(lt));
+  }
+
+  @Test
+  public void test_timedelta_without_millis()
+  {
+    final Gson gson = Converters.registerLocalTime(new GsonBuilder()).create();
+    final LocalTime lt = new LocalTime(1,20,30);
+
+    assertThat(gson.fromJson("\"1:20:30\"", LocalTime.class), is(lt));
   }
 
   /**
