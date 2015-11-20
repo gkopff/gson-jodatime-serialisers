@@ -34,8 +34,9 @@ import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import org.joda.time.DateTime;
 import org.joda.time.LocalTime;
-import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
+import org.joda.time.format.DateTimeFormatterBuilder;
+import org.joda.time.format.ISODateTimeFormat;
 
 import java.lang.reflect.Type;
 
@@ -44,8 +45,11 @@ import java.lang.reflect.Type;
  */
 public class LocalTimeConverter implements JsonSerializer<LocalTime>, JsonDeserializer<LocalTime>
 {
-  /** Format specifier */
-  private static final String PATTERN = "HH:mm:ss.SSS";
+  /** Real ISO8601 Format specifier */
+  private static final DateTimeFormatter FORMATTER = new DateTimeFormatterBuilder()
+          .append(ISODateTimeFormat.time().getPrinter(),
+                  ISODateTimeFormat.localTimeParser().getParser())
+          .toFormatter();
 
   /**
    * Gson invokes this call-back method during serialization when it encounters a field of the
@@ -63,8 +67,7 @@ public class LocalTimeConverter implements JsonSerializer<LocalTime>, JsonDeseri
   @Override
   public JsonElement serialize(LocalTime src, Type typeOfSrc, JsonSerializationContext context)
   {
-    final DateTimeFormatter fmt = DateTimeFormat.forPattern(PATTERN);
-    return new JsonPrimitive(fmt.print(src));
+    return new JsonPrimitive(src.toString(FORMATTER));
   }
 
   /**
@@ -91,7 +94,6 @@ public class LocalTimeConverter implements JsonSerializer<LocalTime>, JsonDeseri
       return null;
     }
 
-    final DateTimeFormatter fmt = DateTimeFormat.forPattern(PATTERN);
-    return fmt.parseLocalTime(json.getAsString());
+    return LocalTime.parse(json.getAsString(), FORMATTER);
   }
 }
