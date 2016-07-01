@@ -28,6 +28,7 @@ package com.fatboyindustrial.gsonjodatime;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.is;
@@ -71,5 +72,33 @@ public class DateTimeConverterTest
     final Gson gson = Converters.registerDateTime(new GsonBuilder()).create();
 
     assertThat(gson.fromJson((String) null, DateTime.class), is(nullValue()));
+  }
+
+  /**
+   * Tests that deserialising an ISO 8601 string with a milliseconds value works
+   */
+  @Test
+  public void testDeserializeWithMilliseconds()
+  {
+    final Gson gson = Converters.registerDateTime(new GsonBuilder()).create();
+    final String str = "\"2016-07-01T12:30:25.0Z\"";
+    final DateTime expected = new DateTime(2016, 7, 1, 12, 30, 25,
+                                           DateTimeZone.UTC).withZone(DateTimeZone.getDefault());
+
+    assertThat(gson.fromJson(str, DateTime.class), is(expected));
+  }
+
+  /**
+   * Tests that deserialising an ISO 8601 string without a milliseconds value works
+   */
+  @Test
+  public void testDeserializeWithoutMilliseconds()
+  {
+    final Gson gson = Converters.registerDateTime(new GsonBuilder()).create();
+    final String str = "\"2016-07-01T12:30:25Z\"";
+    final DateTime expected = new DateTime(2016, 7, 1, 12, 30, 25,
+                                           DateTimeZone.UTC).withZone(DateTimeZone.getDefault());
+
+    assertThat(gson.fromJson(str, DateTime.class), is(expected));
   }
 }
