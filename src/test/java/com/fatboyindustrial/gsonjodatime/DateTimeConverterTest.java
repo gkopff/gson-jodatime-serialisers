@@ -78,7 +78,8 @@ public class DateTimeConverterTest
    * Tests that deserialising an ISO 8601 string with a milliseconds value works
    */
   @Test
-  public void testDeserializeWithMilliseconds() {
+  public void testDeserializeWithMilliseconds()
+  {
     final Gson gson = Converters.registerDateTime(new GsonBuilder()).create();
     final String str = "\"2016-07-01T12:30:25.0Z\"";
     final DateTime expected = new DateTime(2016, 7, 1, 12, 30, 25,
@@ -91,7 +92,8 @@ public class DateTimeConverterTest
    * Tests that deserialising an ISO 8601 string without a milliseconds value works
    */
   @Test
-  public void testDeserializeWithoutMilliseconds() {
+  public void testDeserializeWithoutMilliseconds()
+  {
     final Gson gson = Converters.registerDateTime(new GsonBuilder()).create();
     final String str = "\"2016-07-01T12:30:25Z\"";
     final DateTime expected = new DateTime(2016, 7, 1, 12, 30, 25,
