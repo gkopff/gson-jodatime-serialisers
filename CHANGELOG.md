@@ -1,5 +1,11 @@
 # Change Log
 
+
+## [1.3.0] - 2016-07-03
+
+### Changed
+ - Parsing `DateTime` values that omit milliseconds is now supported (contributed by [Hikaru755](https://github.com/Hikaru755))
+
 ## [1.2.0] - 2015-07-24
 
 ### Changed
