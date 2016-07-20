@@ -34,6 +34,7 @@ import org.joda.time.Interval;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
 import org.joda.time.LocalTime;
+import org.joda.time.Period;
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.is;
@@ -60,6 +61,7 @@ public class ConvertersTest
     original.ldt = new LocalDateTime();
     original.lt = new LocalTime();
     original.i = new Interval(DateTime.now().minusDays(14), DateTime.now().plusDays(2));
+    original.p = Period.days(2);
 
     final Container reconstituted = gson.fromJson(gson.toJson(original), Container.class);
 
@@ -70,6 +72,7 @@ public class ConvertersTest
     assertThat(reconstituted.ldt, is(original.ldt));
     assertThat(reconstituted.lt, is(original.lt));
     assertThat(reconstituted.i, is(original.i));
+    assertThat(reconstituted.p, is(original.p));
   }
 
   /**
@@ -85,5 +88,6 @@ public class ConvertersTest
     private LocalDateTime ldt;
     private LocalTime lt;
     private Interval i;
+    private Period p;
   }
 }
