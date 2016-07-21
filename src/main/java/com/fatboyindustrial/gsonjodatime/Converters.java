@@ -34,6 +34,7 @@ import org.joda.time.Interval;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
 import org.joda.time.LocalTime;
+import org.joda.time.Period;
 
 import java.lang.reflect.Type;
 
@@ -62,6 +63,9 @@ public class Converters
 
   /** The specific genericized type for {@code Duration}. */
   public static final Type DURATION_TYPE = new TypeToken<Duration>(){}.getType();
+  
+  /** The specific genericized type for {@code Period}. */
+  public static final Type PERIOD_TYPE = new TypeToken<Period>(){}.getType();
 
   /**
    * Registers all the Joda Time converters.
@@ -79,6 +83,7 @@ public class Converters
     registerLocalDateTime(builder);
     registerLocalTime(builder);
     registerInterval(builder);
+    registerPeriod(builder);
 
     return builder;
   }
@@ -180,4 +185,19 @@ public class Converters
 
     return builder;
   }
+  
+  /**
+   * Registers the {@link Period} converter.
+   * @param builder The GSON builder to register the converter with.
+   * @return A reference to {@code builder}.
+   */
+  public static GsonBuilder registerPeriod(GsonBuilder builder)
+    {
+        if (builder == null) { throw new NullPointerException("builder cannot be null"); }
+
+        builder.registerTypeAdapter(PERIOD_TYPE, new PeriodConverter() {
+        });
+
+        return builder;
+    }
 }
