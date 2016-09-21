@@ -1,5 +1,9 @@
 # Change Log
 
+## [1.4.0] - 2016-09-21
+
+### Added
+ - Support for `Period` (contributed by [brtietz](https://github.com/brtietz))
 
 ## [1.3.0] - 2016-07-03
 

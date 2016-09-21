@@ -13,6 +13,7 @@ A set of [GSON](http://code.google.com/p/google-gson/) serialiser/deserialisers 
 * `LocalDate`
 * `LocalDateTime`
 * `LocalTime`
+* `Period`
 
 ## Getting it
 
@@ -20,7 +21,7 @@ A set of [GSON](http://code.google.com/p/google-gson/) serialiser/deserialisers 
 <dependency>
   <groupId>com.fatboyindustrial.gson-jodatime-serialisers</groupId>
   <artifactId>gson-jodatime-serialisers</artifactId>
-  <version>1.3.0</version>
+  <version>1.4.0</version>
 </dependency>
 ````
 
