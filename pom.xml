@@ -29,7 +29,7 @@
 
   <groupId>com.fatboyindustrial.gson-jodatime-serialisers</groupId>
   <artifactId>gson-jodatime-serialisers</artifactId>
-  <version>1.4.0-SNAPSHOT</version>
+  <version>1.4.0</version>
   <packaging>jar</packaging>
 
   <name>gson-jodatime-serialisers</name>
