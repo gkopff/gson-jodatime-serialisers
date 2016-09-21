@@ -35,41 +35,41 @@ import static org.hamcrest.core.IsNull.nullValue;
 import static org.junit.Assert.assertThat;
 
 /**
- * Created by brtietz on 7/20/16.
+ * Tests for {@link PeriodConverter}.
  */
-public class PeriodConverterTest {
+public class PeriodConverterTest
+{
+  /**
+   *  Tests that the {@link Period} can be round-tripped.
+   */
+  @Test
+  public void testRoundtrip()
+  {
+    final Gson gson = Converters.registerPeriod(new GsonBuilder()).create();
+    final Period p = Period.days(2);
 
-    /**
-     *  Tests that the {@link Period} can be round-tripped.
-     */
-    @Test
-    public void testRoundtrip()
-    {
-        final Gson gson = Converters.registerPeriod(new GsonBuilder()).create();
-        final Period p = Period.days(2);
+    assertThat(gson.fromJson(gson.toJson(p), Period.class), is(p));
+  }
 
-        assertThat(gson.fromJson(gson.toJson(p), Period.class), is(p));
-    }
+  /**
+   * Tests that deserialising an empty string returns null.
+   */
+  @Test
+  public void testDeserialiseEmptyString()
+  {
+    final Gson gson = Converters.registerPeriod(new GsonBuilder()).create();
 
-    /**
-     * Tests that deserialising an empty string returns null
-     */
-    @Test
-    public void testDeserialiseEmptyString()
-    {
-        final Gson gson = Converters.registerPeriod(new GsonBuilder()).create();
+    assertThat(gson.fromJson("", Period.class), is(nullValue()));
+  }
 
-        assertThat(gson.fromJson("", Period.class), is(nullValue()));
-    }
+  /**
+   * Tests that deserialising a null string returns null.
+   */
+  @Test
+  public void testDeserialiseNullString()
+  {
+    final Gson gson = Converters.registerPeriod(new GsonBuilder()).create();
 
-    /**
-     * Tests that deserialising a null string returns null
-     */
-    @Test
-    public void testDeserialiseNullString()
-    {
-        final Gson gson = Converters.registerPeriod(new GsonBuilder()).create();
-
-        assertThat(gson.fromJson((String) null, Period.class), is(nullValue()));
-    }
+    assertThat(gson.fromJson((String) null, Period.class), is(nullValue()));
+  }
 }

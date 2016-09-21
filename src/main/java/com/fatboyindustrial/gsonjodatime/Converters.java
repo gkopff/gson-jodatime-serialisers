@@ -192,12 +192,11 @@ public class Converters
    * @return A reference to {@code builder}.
    */
   public static GsonBuilder registerPeriod(GsonBuilder builder)
-    {
-        if (builder == null) { throw new NullPointerException("builder cannot be null"); }
+  {
+    if (builder == null) { throw new NullPointerException("builder cannot be null"); }
 
-        builder.registerTypeAdapter(PERIOD_TYPE, new PeriodConverter() {
-        });
+    builder.registerTypeAdapter(PERIOD_TYPE, new PeriodConverter());
 
-        return builder;
-    }
+    return builder;
+  }
 }
