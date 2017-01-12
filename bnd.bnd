@@ -1,0 +1,8 @@
+Bundle-SymbolicName: com.fatboyindustrial.gson.jodatime.serialisers
+Bundle-Name: Gson Joda-Time serialisers
+Bundle-Description: ${project.description}
+
+-removeheaders: Private-Package
+
+-exportcontents:\
+    com.fatboyindustrial.gsonjodatime,\
