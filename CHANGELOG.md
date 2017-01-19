@@ -1,5 +1,10 @@
 # Change Log
 
+## [1.5.0] - 2017-01-19
+
+### Added
+ - Made OSGi aware (contributed by [spegelref](https://github.com/spegelref)) 
+ 
 ## [1.4.0] - 2016-09-21
 
 ### Added
