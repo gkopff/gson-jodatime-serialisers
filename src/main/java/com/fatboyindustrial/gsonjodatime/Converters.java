@@ -31,6 +31,7 @@ import org.joda.time.DateMidnight;
 import org.joda.time.DateTime;
 import org.joda.time.Duration;
 import org.joda.time.Interval;
+import org.joda.time.Instant;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
 import org.joda.time.LocalTime;
@@ -63,9 +64,12 @@ public class Converters
 
   /** The specific genericized type for {@code Duration}. */
   public static final Type DURATION_TYPE = new TypeToken<Duration>(){}.getType();
-  
+
   /** The specific genericized type for {@code Period}. */
   public static final Type PERIOD_TYPE = new TypeToken<Period>(){}.getType();
+
+  /** The specific genericized type for {@code Instant}. */
+  public static final Type INSTANT_TYPE = new TypeToken<Instant>(){}.getType();
 
   /**
    * Registers all the Joda Time converters.
@@ -84,6 +88,7 @@ public class Converters
     registerLocalTime(builder);
     registerInterval(builder);
     registerPeriod(builder);
+    registerInstant(builder);
 
     return builder;
   }
@@ -168,6 +173,20 @@ public class Converters
     if (builder == null) { throw new NullPointerException("builder cannot be null"); }
 
     builder.registerTypeAdapter(LOCAL_TIME_TYPE, new LocalTimeConverter());
+
+    return builder;
+  }
+
+  /**
+   * Registers the {@link Instant} converter.
+   * @param builder The GSON builder to register the converter with.
+   * @return A reference to {@code builder}.
+   */
+  public static GsonBuilder registerInstant(GsonBuilder builder)
+  {
+    if (builder == null) { throw new NullPointerException("builder cannot be null"); }
+
+    builder.registerTypeAdapter(INSTANT_TYPE, new InstantConverter());
 
     return builder;
   }
