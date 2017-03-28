@@ -10,6 +10,7 @@ A set of [GSON](http://code.google.com/p/google-gson/) serialiser/deserialisers 
 * `DateTime`
 * `Duration`
 * `Interval`
+* `Instant`
 * `LocalDate`
 * `LocalDateTime`
 * `LocalTime`
@@ -21,7 +22,7 @@ A set of [GSON](http://code.google.com/p/google-gson/) serialiser/deserialisers 
 <dependency>
   <groupId>com.fatboyindustrial.gson-jodatime-serialisers</groupId>
   <artifactId>gson-jodatime-serialisers</artifactId>
-  <version>1.5.0</version>
+  <version>1.6.0</version>
 </dependency>
 ````
 

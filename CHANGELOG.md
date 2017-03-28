@@ -1,5 +1,10 @@
 # Change Log
 
+## [1.6.0] - 2017-03-29
+
+### Added
+ - Support for `Instant` (contributed by [JamesMcIntosh](https://github.com/JamesMcIntosh)) 
+ 
 ## [1.5.0] - 2017-01-19
 
 ### Added
