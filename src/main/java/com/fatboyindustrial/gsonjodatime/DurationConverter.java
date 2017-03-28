@@ -1,7 +1,7 @@
 /*
  * GSON Joda Time Serialisers
  *
- * Copyright 2015 Greg Kopff
+ * Copyright 2017 Greg Kopff
  * All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy

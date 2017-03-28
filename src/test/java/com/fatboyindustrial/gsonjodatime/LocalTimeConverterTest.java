@@ -1,7 +1,7 @@
 /*
  * GSON Joda Time Serialisers
  *
- * Copyright 2013-2014 Greg Kopff
+ * Copyright 2013-2017 Greg Kopff
  * All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -28,9 +28,6 @@ package com.fatboyindustrial.gsonjodatime;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.joda.time.LocalTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
-import org.joda.time.format.ISODateTimeFormat;
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.is;
