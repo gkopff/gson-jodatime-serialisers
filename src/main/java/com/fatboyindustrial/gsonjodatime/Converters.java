@@ -29,6 +29,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import org.joda.time.DateMidnight;
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.joda.time.Duration;
 import org.joda.time.Interval;
 import org.joda.time.Instant;
@@ -71,6 +72,9 @@ public class Converters
   /** The specific genericized type for {@code Instant}. */
   public static final Type INSTANT_TYPE = new TypeToken<Instant>(){}.getType();
 
+  /** The specific genericized type for {@code DateTimeZone}. */
+  public static final Type DATE_TIME_ZONE_TYPE = new TypeToken<DateTimeZone>(){}.getType();
+
   /**
    * Registers all the Joda Time converters.
    * @param builder The GSON builder to register the converters with.
@@ -89,6 +93,7 @@ public class Converters
     registerInterval(builder);
     registerPeriod(builder);
     registerInstant(builder);
+    registerDateTimeZone(builder);
 
     return builder;
   }
@@ -204,7 +209,7 @@ public class Converters
 
     return builder;
   }
-  
+
   /**
    * Registers the {@link Period} converter.
    * @param builder The GSON builder to register the converter with.
@@ -218,4 +223,19 @@ public class Converters
 
     return builder;
   }
+
+  /**
+   * Registers the {@link DateTimeZone} converter.
+   * @param builder The GSON builder to register the converter with.
+   * @return A reference to {@code builder}.
+   */
+  public static GsonBuilder registerDateTimeZone(GsonBuilder builder)
+  {
+    if (builder == null) { throw new NullPointerException("builder cannot be null"); }
+
+    builder.registerTypeAdapter(DATE_TIME_ZONE_TYPE, new DateTimeZoneConverter());
+
+    return builder;
+  }
+
 }
