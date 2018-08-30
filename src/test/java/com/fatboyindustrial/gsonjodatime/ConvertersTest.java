@@ -29,6 +29,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.joda.time.DateMidnight;
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.joda.time.Duration;
 import org.joda.time.Interval;
 import org.joda.time.LocalDate;
@@ -56,6 +57,7 @@ public class ConvertersTest
     //noinspection deprecation
     original.dm = new DateMidnight();
     original.dt = new DateTime();
+    original.dtz = DateTimeZone.forID("UTC");
     original.d = Duration.standardMinutes(30L);
     original.ld = new LocalDate();
     original.ldt = new LocalDateTime();
@@ -67,6 +69,7 @@ public class ConvertersTest
 
     assertThat(reconstituted.dm, is(original.dm));
     assertThat(reconstituted.dt, is(original.dt));
+    assertThat(reconstituted.dtz, is(original.dtz));
     assertThat(reconstituted.d, is(original.d));
     assertThat(reconstituted.ld, is(original.ld));
     assertThat(reconstituted.ldt, is(original.ldt));
@@ -83,6 +86,7 @@ public class ConvertersTest
     @SuppressWarnings("deprecation")
     private DateMidnight dm;
     private DateTime dt;
+    private DateTimeZone dtz;
     private Duration d;
     private LocalDate ld;
     private LocalDateTime ldt;
