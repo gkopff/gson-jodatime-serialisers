@@ -1,7 +1,7 @@
 /*
  * GSON Joda Time Serialisers
  *
- * Copyright 2015-2017 Greg Kopff
+ * Copyright 2018 Greg Kopff
  * All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -37,35 +37,39 @@ import static org.junit.Assert.assertThat;
 /**
  * Tests for {@link DateTimeZoneConverterTest}.
  */
-public class DateTimeZoneConverterTest {
-    /**
-     * Tests that the {@link org.joda.time.DateTimeZone} can be round-tripped.
-     */
-    @Test
-    public void testRoundtrip() {
-        final Gson gson = Converters.registerDateTimeZone(new GsonBuilder()).create();
-        final DateTimeZone z = DateTimeZone.forID("America/New_York");
+public class DateTimeZoneConverterTest
+{
+  /**
+   * Tests that the {@link org.joda.time.DateTimeZone} can be round-tripped.
+   */
+  @Test
+  public void testRoundtrip()
+  {
+    final Gson gson = Converters.registerDateTimeZone(new GsonBuilder()).create();
+    final DateTimeZone z = DateTimeZone.forID("America/New_York");
 
-        assertThat(gson.fromJson(gson.toJson(z, DateTimeZone.class), DateTimeZone.class), is(z));
-    }
+    assertThat(gson.fromJson(gson.toJson(z, DateTimeZone.class), DateTimeZone.class), is(z));
+  }
 
-    /**
-     * Tests that deserialising an empty string returns null.
-     */
-    @Test
-    public void testDeserialiseEmptyString() {
-        final Gson gson = Converters.registerDateTimeZone(new GsonBuilder()).create();
+  /**
+   * Tests that deserialising an empty string returns null.
+   */
+  @Test
+  public void testDeserialiseEmptyString()
+  {
+    final Gson gson = Converters.registerDateTimeZone(new GsonBuilder()).create();
 
-        assertThat(gson.fromJson("", DateTimeZone.class), is(nullValue()));
-    }
+    assertThat(gson.fromJson("", DateTimeZone.class), is(nullValue()));
+  }
 
-    /**
-     * Tests that deserialising a null string returns null.
-     */
-    @Test
-    public void testDeserialiseNullString() {
-        final Gson gson = Converters.registerDateTimeZone(new GsonBuilder()).create();
+  /**
+   * Tests that deserialising a null string returns null.
+   */
+  @Test
+  public void testDeserialiseNullString()
+  {
+    final Gson gson = Converters.registerDateTimeZone(new GsonBuilder()).create();
 
-        assertThat(gson.fromJson((String) null, DateTimeZone.class), is(nullValue()));
-    }
+    assertThat(gson.fromJson((String) null, DateTimeZone.class), is(nullValue()));
+  }
 }
