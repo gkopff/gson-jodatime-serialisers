@@ -1,5 +1,10 @@
 # Change Log
 
+## [1.7.0] - 2018-08-30
+
+### Added
+ - Support for `DateTimeZone` (contributed by [manianand74](https://github.com/manianand74)) 
+ 
 ## [1.6.0] - 2017-03-29
 
 ### Added
