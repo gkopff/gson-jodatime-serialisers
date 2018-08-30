@@ -8,6 +8,7 @@ A set of [GSON](http://code.google.com/p/google-gson/) serialiser/deserialisers 
 
 * `DateMidnight`
 * `DateTime`
+* `DateTimeZone`
 * `Duration`
 * `Interval`
 * `Instant`
@@ -22,7 +23,7 @@ A set of [GSON](http://code.google.com/p/google-gson/) serialiser/deserialisers 
 <dependency>
   <groupId>com.fatboyindustrial.gson-jodatime-serialisers</groupId>
   <artifactId>gson-jodatime-serialisers</artifactId>
-  <version>1.6.0</version>
+  <version>1.7.0</version>
 </dependency>
 ````
 
