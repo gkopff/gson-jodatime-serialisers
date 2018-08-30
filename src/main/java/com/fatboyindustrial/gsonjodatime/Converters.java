@@ -128,7 +128,7 @@ public class Converters
 
   /**
    * Registers the {@link Duration} converter.
-   + @param builder The GSON builder to register the converter with.
+   * @param builder The GSON builder to register the converter with.
    * @return A reference to {@code builder}.
    */
   public static GsonBuilder registerDuration(GsonBuilder builder)
