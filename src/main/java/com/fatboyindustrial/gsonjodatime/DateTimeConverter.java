@@ -87,7 +87,7 @@ public class DateTimeConverter implements JsonSerializer<DateTime>, JsonDeserial
       return null;
     }
 
-    final DateTimeFormatter fmt = ISODateTimeFormat.dateTimeParser();
+    final DateTimeFormatter fmt = ISODateTimeFormat.dateTimeParser().withOffsetParsed();
     return fmt.parseDateTime(json.getAsString());
   }
 }

@@ -101,4 +101,17 @@ public class DateTimeConverterTest
 
     assertThat(gson.fromJson(str, DateTime.class), is(expected));
   }
+
+  /**
+   * Tests that deserialising an ISO 8601 string with a timezone offset works
+   */
+  @Test
+  public void testDeserializeWithTimezoneOffset()
+  {
+    final Gson gson = Converters.registerDateTime(new GsonBuilder()).create();
+    final String str = "2019-01-31T10:37:20.631+01:00";
+    final String json = "\"" + str + "\"";
+
+    assertThat(gson.fromJson(json, DateTime.class).toString(), is(str));
+  }
 }
