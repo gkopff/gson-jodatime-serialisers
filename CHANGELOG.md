@@ -1,5 +1,10 @@
 # Change Log
 
+## [1.7.1] - 2019-02-04
+
+### Fixed
+ - Correctly deserialise ISO 8601 string with timezone offset into a `DateTime` (contributed by [sgrossberndt](https://github.com/sgrossberndt)).
+
 ## [1.7.0] - 2018-08-30
 
 ### Added
