@@ -68,7 +68,7 @@ public class ConvertersTest
     final Container reconstituted = gson.fromJson(gson.toJson(original), Container.class);
 
     assertThat(reconstituted.dm, is(original.dm));
-    assertThat(reconstituted.dt, is(original.dt));
+    assertThat(reconstituted.dt.toString(), is(original.dt.toString()));  // work-around the loss of zone name and just worry about the offset
     assertThat(reconstituted.dtz, is(original.dtz));
     assertThat(reconstituted.d, is(original.d));
     assertThat(reconstituted.ld, is(original.ld));
