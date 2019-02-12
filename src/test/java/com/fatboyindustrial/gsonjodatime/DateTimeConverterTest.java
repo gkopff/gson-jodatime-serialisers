@@ -48,8 +48,11 @@ public class DateTimeConverterTest
   {
     final Gson gson = Converters.registerDateTime(new GsonBuilder()).create();
     final DateTime dt = new DateTime();
-    
-    assertThat(gson.fromJson(gson.toJson(dt), DateTime.class), is(dt));
+
+    final DateTime reconstituted = gson.fromJson(gson.toJson(dt), DateTime.class);
+
+    assertThat(reconstituted.getMillis(), is(dt.getMillis()));
+    assertThat(reconstituted.getZone().getOffset(reconstituted.getMillis()), is(dt.getZone().getOffset(dt.getMillis())));
   }
 
   /**
@@ -82,10 +85,12 @@ public class DateTimeConverterTest
   {
     final Gson gson = Converters.registerDateTime(new GsonBuilder()).create();
     final String str = "\"2016-07-01T12:30:25.0Z\"";
-    final DateTime expected = new DateTime(2016, 7, 1, 12, 30, 25,
-                                           DateTimeZone.UTC).withZone(DateTimeZone.getDefault());
+    final DateTime expected = new DateTime(2016, 7, 1, 12, 30, 25, DateTimeZone.UTC);
 
-    assertThat(gson.fromJson(str, DateTime.class), is(expected));
+    final DateTime reconstituted = gson.fromJson(str, DateTime.class);
+
+    assertThat(reconstituted.getMillis(), is(expected.getMillis()));
+    assertThat(reconstituted.getZone().getOffset(reconstituted.getMillis()), is(expected.getZone().getOffset(expected.getMillis())));
   }
 
   /**
@@ -96,10 +101,12 @@ public class DateTimeConverterTest
   {
     final Gson gson = Converters.registerDateTime(new GsonBuilder()).create();
     final String str = "\"2016-07-01T12:30:25Z\"";
-    final DateTime expected = new DateTime(2016, 7, 1, 12, 30, 25,
-                                           DateTimeZone.UTC).withZone(DateTimeZone.getDefault());
+    final DateTime expected = new DateTime(2016, 7, 1, 12, 30, 25, DateTimeZone.UTC);
 
-    assertThat(gson.fromJson(str, DateTime.class), is(expected));
+    final DateTime reconstituted = gson.fromJson(str, DateTime.class);
+
+    assertThat(reconstituted.getMillis(), is(expected.getMillis()));
+    assertThat(reconstituted.getZone().getOffset(reconstituted.getMillis()), is(expected.getZone().getOffset(expected.getMillis())));
   }
 
   /**
