@@ -144,4 +144,34 @@ public class InstantConverterTest
     assertThat(reconstituted.toString(), is(expectedStr));
     assertThat(reconstituted, is(expected));
   }
+
+  /**
+   * Tests that serialising an instant with milliseconds returns the expected ISO 8601 string
+   */
+  @Test
+  public void testSerializeWithMilliseconds()
+  {
+    final Gson gson = Converters.registerInstant(new GsonBuilder()).create();
+    final Instant instant = Instant.parse("2019-07-23T00:06:12.123Z");
+    final String expectedJson = "\"2019-07-23T00:06:12.123Z\"";
+
+    final String actualJson = gson.toJson(instant);
+
+    assertThat(actualJson, is(expectedJson));
+  }
+
+  /**
+   * Tests that serialising an instant with out milliseconds returns the expected ISO 8601 string
+   */
+  @Test
+  public void testSerializeWithOutMilliseconds()
+  {
+    final Gson gson = Converters.registerInstant(new GsonBuilder()).create();
+    final Instant instant = Instant.parse("2019-07-23T00:06:12Z");
+    final String expectedJson = "\"2019-07-23T00:06:12.000Z\"";
+
+    final String actualJson = gson.toJson(instant);
+
+    assertThat(actualJson, is(expectedJson));
+  }
 }
