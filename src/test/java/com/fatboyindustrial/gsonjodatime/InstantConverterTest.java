@@ -78,7 +78,7 @@ public class InstantConverterTest
    * Tests that deserialising an ISO 8601 string with milliseconds returns an instant with milliseconds
    */
   @Test
-  public void testDeserializeWithMilliseconds()
+  public void testDeserialiseWithMilliseconds()
   {
     final Gson gson = Converters.registerInstant(new GsonBuilder()).create();
     final String json = "\"2019-07-23T00:06:12.123Z\"";
@@ -96,7 +96,7 @@ public class InstantConverterTest
    * Tests that deserialising an ISO 8601 string without milliseconds returns an instant with zero milliseconds
    */
   @Test
-  public void testDeserializeWithoutMilliseconds()
+  public void testDeserialiseWithoutMilliseconds()
   {
     final Gson gson = Converters.registerInstant(new GsonBuilder()).create();
     final String json = "\"2019-07-23T00:06:12Z\"";
@@ -114,7 +114,7 @@ public class InstantConverterTest
    * Tests that deserialising an ISO 8601 string with microseconds returns an instant with milliseconds portion of string
    */
   @Test
-  public void testDeserializeWithMicroseconds()
+  public void testDeserialiseWithMicroseconds()
   {
     final Gson gson = Converters.registerInstant(new GsonBuilder()).create();
     final String json = "\"2019-07-23T00:06:12.123456Z\"";
@@ -132,7 +132,7 @@ public class InstantConverterTest
    * Tests that deserialising an ISO 8601 string with a timezone returns an instant (converted to utc)
    */
   @Test
-  public void testDeserializeWithTimezoneOffset()
+  public void testDeserialiseWithTimezoneOffset()
   {
     final Gson gson = Converters.registerInstant(new GsonBuilder()).create();
     final String json = "\"2019-07-23T01:06:12.123+01:00\"";
@@ -149,7 +149,7 @@ public class InstantConverterTest
    * Tests that serialising an instant with milliseconds returns the expected ISO 8601 string
    */
   @Test
-  public void testSerializeWithMilliseconds()
+  public void testSerialiseWithMilliseconds()
   {
     final Gson gson = Converters.registerInstant(new GsonBuilder()).create();
     final Instant instant = Instant.parse("2019-07-23T00:06:12.123Z");
@@ -164,7 +164,7 @@ public class InstantConverterTest
    * Tests that serialising an instant with out milliseconds returns the expected ISO 8601 string
    */
   @Test
-  public void testSerializeWithOutMilliseconds()
+  public void testSerialiseWithOutMilliseconds()
   {
     final Gson gson = Converters.registerInstant(new GsonBuilder()).create();
     final Instant instant = Instant.parse("2019-07-23T00:06:12Z");
