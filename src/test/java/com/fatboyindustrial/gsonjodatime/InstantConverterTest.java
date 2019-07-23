@@ -1,7 +1,7 @@
 /*
  * GSON Joda Time Serialisers
  *
- * Copyright 2017 Greg Kopff
+ * Copyright 2019 Greg Kopff
  * All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -72,5 +72,76 @@ public class InstantConverterTest
     final Gson gson = Converters.registerInstant(new GsonBuilder()).create();
 
     assertThat(gson.fromJson((String) null, Instant.class), is(nullValue()));
+  }
+
+  /**
+   * Tests that deserialising an ISO 8601 string with milliseconds returns an instant with milliseconds
+   */
+  @Test
+  public void testDeserializeWithMilliseconds()
+  {
+    final Gson gson = Converters.registerInstant(new GsonBuilder()).create();
+    final String json = "\"2019-07-23T00:06:12.123Z\"";
+    final String expectedStr = "2019-07-23T00:06:12.123Z";
+    final Instant expected = Instant.parse("2019-07-23T00:06:12.123Z");
+
+    final Instant reconstituted = gson.fromJson(json, Instant.class);
+
+    assertThat(reconstituted.getMillis(), is(expected.getMillis()));
+    assertThat(reconstituted.toString(), is(expectedStr));
+    assertThat(reconstituted, is(expected));
+  }
+
+  /**
+   * Tests that deserialising an ISO 8601 string without milliseconds returns an instant with zero milliseconds
+   */
+  @Test
+  public void testDeserializeWithoutMilliseconds()
+  {
+    final Gson gson = Converters.registerInstant(new GsonBuilder()).create();
+    final String json = "\"2019-07-23T00:06:12Z\"";
+    final String expectedStr = "2019-07-23T00:06:12.000Z";
+    final Instant expected = Instant.parse("2019-07-23T00:06:12.000Z");
+
+    final Instant reconstituted = gson.fromJson(json, Instant.class);
+
+    assertThat(reconstituted.getMillis(), is(expected.getMillis()));
+    assertThat(reconstituted.toString(), is(expectedStr));
+    assertThat(reconstituted, is(expected));
+  }
+
+  /**
+   * Tests that deserialising an ISO 8601 string with microseconds returns an instant with milliseconds portion of string
+   */
+  @Test
+  public void testDeserializeWithMicroseconds()
+  {
+    final Gson gson = Converters.registerInstant(new GsonBuilder()).create();
+    final String json = "\"2019-07-23T00:06:12.123456Z\"";
+    final String expectedStr = "2019-07-23T00:06:12.123Z";
+    final Instant expected = Instant.parse("2019-07-23T00:06:12.123Z");
+
+    final Instant reconstituted = gson.fromJson(json, Instant.class);
+
+    assertThat(reconstituted.getMillis(), is(expected.getMillis()));
+    assertThat(reconstituted.toString(), is(expectedStr));
+    assertThat(reconstituted, is(expected));
+  }
+
+  /**
+   * Tests that deserialising an ISO 8601 string with a timezone returns an instant (converted to utc)
+   */
+  @Test
+  public void testDeserializeWithTimezoneOffset()
+  {
+    final Gson gson = Converters.registerInstant(new GsonBuilder()).create();
+    final String json = "\"2019-07-23T01:06:12.123+01:00\"";
+    final String expectedStr = "2019-07-23T00:06:12.123Z";
+    final Instant expected = Instant.parse("2019-07-23T01:06:12.123+01:00");
+
+    final Instant reconstituted = gson.fromJson(json, Instant.class);
+
+    assertThat(reconstituted.toString(), is(expectedStr));
+    assertThat(reconstituted, is(expected));
   }
 }
