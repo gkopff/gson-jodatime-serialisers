@@ -1,7 +1,7 @@
 /*
  * GSON Joda Time Serialisers
  *
- * Copyright 2017 Greg Kopff
+ * Copyright 2019 Greg Kopff
  * All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -33,8 +33,8 @@ import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import org.joda.time.Instant;
-import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
+import org.joda.time.format.ISODateTimeFormat;
 
 import java.lang.reflect.Type;
 
@@ -43,8 +43,10 @@ import java.lang.reflect.Type;
  */
 public class InstantConverter implements JsonSerializer<Instant>, JsonDeserializer<Instant>
 {
+  /** Printer. */
+  private static final DateTimeFormatter printer = ISODateTimeFormat.dateTime().withZoneUTC();
   /** Formatter. */
-  private static final DateTimeFormatter fmt = DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").withZoneUTC();
+  private static final DateTimeFormatter formatter = ISODateTimeFormat.dateTimeParser().withZoneUTC();
 
   /**
    * Gson invokes this call-back method during serialization when it encounters a field of the
@@ -62,7 +64,7 @@ public class InstantConverter implements JsonSerializer<Instant>, JsonDeserializ
   @Override
   public JsonElement serialize(Instant src, Type typeOfSrc, JsonSerializationContext context)
   {
-    return new JsonPrimitive(fmt.print(src));
+    return new JsonPrimitive(printer.print(src));
   }
 
   /**
@@ -88,6 +90,6 @@ public class InstantConverter implements JsonSerializer<Instant>, JsonDeserializ
       return null;
     }
 
-    return Instant.parse(json.getAsString(), fmt);
+    return Instant.parse(json.getAsString(), formatter);
   }
 }
