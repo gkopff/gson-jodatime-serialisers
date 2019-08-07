@@ -1,5 +1,12 @@
 # Change Log
 
+## [1.8.0] - 2019-07-07
+
+### Added
+ - Add Kotlin extension functions support (contributed by [mihakrajnc](https://github.com/mihakrajnc))
+ - Enhance `Instant` deserialisation so it can deserialise values with or without milliseconds (contributed by [nathanrobb](https://github.com/nathanrobb))
+ - Enhance `Instant` deserialisation so it can deserialise values a timezone offset (contributed by [nathanrobb](https://github.com/nathanrobb))
+
 ## [1.7.1] - 2019-02-04
 
 ### Fixed
