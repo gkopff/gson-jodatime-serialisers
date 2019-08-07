@@ -22,7 +22,7 @@ A set of [Gson](http://code.google.com/p/google-gson/) serialiser/deserialisers 
 <dependency>
   <groupId>com.fatboyindustrial.gson-jodatime-serialisers</groupId>
   <artifactId>gson-jodatime-serialisers</artifactId>
-  <version>1.7.1</version>
+  <version>1.8.0</version>
 </dependency>
 ````
 
