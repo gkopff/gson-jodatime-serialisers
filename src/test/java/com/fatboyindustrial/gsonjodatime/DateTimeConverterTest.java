@@ -29,6 +29,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.ISODateTimeFormat;
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.is;
@@ -120,5 +122,23 @@ public class DateTimeConverterTest
     final String json = "\"" + str + "\"";
 
     assertThat(gson.fromJson(json, DateTime.class).toString(), is(str));
+  }
+
+  @Test
+  public void testDeserializeCustomFormat()
+  {
+    final Gson gson = Converters
+      .registerDateTime(
+        new GsonBuilder(),
+        ISODateTimeFormat.dateTime(),
+        DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss").withZoneUTC())
+      .create();
+
+    final String str = "\"2016-07-01 12:30:25\"";
+
+    final DateTime expected = new DateTime(2016, 7, 1, 12, 30, 25, DateTimeZone.UTC);
+    final DateTime reconstituted = gson.fromJson(str, DateTime.class);
+
+    assertThat(reconstituted, is(expected));
   }
 }

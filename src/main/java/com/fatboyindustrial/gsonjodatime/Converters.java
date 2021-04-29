@@ -37,6 +37,8 @@ import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
 import org.joda.time.LocalTime;
 import org.joda.time.Period;
+import org.joda.time.format.DateTimeFormatter;
+import org.joda.time.format.ISODateTimeFormat;
 
 import java.lang.reflect.Type;
 
@@ -121,7 +123,36 @@ public class Converters
   {
     if (builder == null) { throw new NullPointerException("builder cannot be null"); }
 
-    builder.registerTypeAdapter(DATE_TIME_TYPE, new DateTimeConverter());
+    builder.registerTypeAdapter(
+      DATE_TIME_TYPE,
+      new DateTimeConverter(
+        ISODateTimeFormat.dateTime(),
+        ISODateTimeFormat.dateTimeParser().withOffsetParsed()));
+
+    return builder;
+  }
+
+  /**
+   * Registers the {@link DateTime} converter.
+   * @param builder The GSON builder to register the converter with.
+   * @param serializeFormatter The DateTimeFormatter to use during ser.
+   * @param deserializeFormatter The DateTimeFormatter to use during des.
+   * @return A reference to {@code builder}.
+   */
+  public static GsonBuilder registerDateTime(
+    GsonBuilder builder,
+    DateTimeFormatter serializeFormatter,
+    DateTimeFormatter deserializeFormatter)
+  {
+    if (builder == null) { throw new NullPointerException("builder cannot be null"); }
+    if (serializeFormatter == null) { throw new NullPointerException("serializeFormatter cannot be null"); }
+    if (deserializeFormatter == null) { throw new NullPointerException("deserializeFormatter cannot be null"); }
+
+    builder.registerTypeAdapter(
+      DATE_TIME_TYPE,
+      new DateTimeConverter(
+        serializeFormatter,
+        deserializeFormatter));
 
     return builder;
   }
