@@ -145,6 +145,8 @@ public class Converters
     DateTimeFormatter deserializeFormatter)
   {
     if (builder == null) { throw new NullPointerException("builder cannot be null"); }
+    if (serializeFormatter == null) { throw new NullPointerException("serializeFormatter cannot be null"); }
+    if (deserializeFormatter == null) { throw new NullPointerException("deserializeFormatter cannot be null"); }
 
     builder.registerTypeAdapter(
       DATE_TIME_TYPE,

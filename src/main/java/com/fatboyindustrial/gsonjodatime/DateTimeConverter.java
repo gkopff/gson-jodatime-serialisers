@@ -49,6 +49,9 @@ public class DateTimeConverter implements JsonSerializer<DateTime>, JsonDeserial
     final DateTimeFormatter serializeFormatter,
     final DateTimeFormatter deserializeFormatter)
   {
+    if (serializeFormatter == null) { throw new NullPointerException("serializeFormatter cannot be null"); }
+    if (deserializeFormatter == null) { throw new NullPointerException("deserializeFormatter cannot be null"); }
+
     this.serializeFormatter = serializeFormatter;
     this.deserializeFormatter = deserializeFormatter;
   }
