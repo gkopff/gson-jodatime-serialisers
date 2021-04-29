@@ -34,7 +34,6 @@ import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormatter;
-import org.joda.time.format.ISODateTimeFormat;
 
 import java.lang.reflect.Type;
 
@@ -43,6 +42,17 @@ import java.lang.reflect.Type;
  */
 public class DateTimeConverter implements JsonSerializer<DateTime>, JsonDeserializer<DateTime>
 {
+  private final DateTimeFormatter serializeFormatter;
+  private final DateTimeFormatter deserializeFormatter;
+
+  public DateTimeConverter(
+    final DateTimeFormatter serializeFormatter,
+    final DateTimeFormatter deserializeFormatter)
+  {
+    this.serializeFormatter = serializeFormatter;
+    this.deserializeFormatter = deserializeFormatter;
+  }
+
   /**
    * Gson invokes this call-back method during serialization when it encounters a field of the
    * specified type. <p>
@@ -59,8 +69,7 @@ public class DateTimeConverter implements JsonSerializer<DateTime>, JsonDeserial
   @Override
   public JsonElement serialize(DateTime src, Type typeOfSrc, JsonSerializationContext context)
   {
-    final DateTimeFormatter fmt = ISODateTimeFormat.dateTime();
-    return new JsonPrimitive(fmt.print(src));
+    return new JsonPrimitive(this.serializeFormatter.print(src));
   }
 
   /**
@@ -87,7 +96,6 @@ public class DateTimeConverter implements JsonSerializer<DateTime>, JsonDeserial
       return null;
     }
 
-    final DateTimeFormatter fmt = ISODateTimeFormat.dateTimeParser().withOffsetParsed();
-    return fmt.parseDateTime(json.getAsString());
+    return this.deserializeFormatter.parseDateTime(json.getAsString());
   }
 }
